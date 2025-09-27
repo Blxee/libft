@@ -8,5 +8,6 @@
 size_t ft_strlen(const char *s);
 
 void ft_putchar(char c);
+void ft_putstr(char const *s);
 
 #endif
