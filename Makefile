@@ -16,7 +16,7 @@ $(NAME): $(OBJS)
 	ar -rcs $@ $^
 
 $(TEST_NAME): $(NAME) $(TEST_OBJS)
-	$(CC) $(TEST_FLAGS) $(TEST_OBJS) -o $@
+	$(CC) $(TEST_OBJS) $(TEST_FLAGS) -o $@
 
 %.o: %.c
 	$(CC) -c $(CFLAGS) $< -o $@
