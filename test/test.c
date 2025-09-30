@@ -26,5 +26,6 @@ int main(void)
 	run_test(test_ft_tolower, "ft_tolower");
 	run_test(test_ft_strcmp, "ft_strcmp");
 	run_test(test_ft_strncmp, "ft_strncmp");
+	run_test(test_ft_memset, "ft_memset");
 	return (0);
 }
