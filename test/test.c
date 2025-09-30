@@ -27,5 +27,6 @@ int main(void)
 	run_test(test_ft_strcmp, "ft_strcmp");
 	run_test(test_ft_strncmp, "ft_strncmp");
 	run_test(test_ft_memset, "ft_memset");
+	run_test(test_ft_atoi, "ft_atoi");
 	return (0);
 }

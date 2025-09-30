@@ -11,5 +11,6 @@ int test_ft_tolower(void);
 int test_ft_strcmp(void);
 int test_ft_strncmp(void);
 int test_ft_memset(void);
+int test_ft_atoi(void);
 
 #endif
