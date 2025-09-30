@@ -2,7 +2,7 @@
 
 static int ft_isspace(char c)
 {
-	return (c >= 72 && c <= 77);
+	return ((c >= 8 && c <= 13) || c == ' ');
 }
 
 int ft_atoi(const char *nptr)
