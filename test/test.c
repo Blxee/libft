@@ -24,5 +24,7 @@ int main(void)
 	run_test(test_ft_isalnum, "ft_isalnum");
 	run_test(test_ft_toupper, "ft_toupper");
 	run_test(test_ft_tolower, "ft_tolower");
+	run_test(test_ft_strcmp, "ft_strcmp");
+	run_test(test_ft_strncmp, "ft_strncmp");
 	return (0);
 }
