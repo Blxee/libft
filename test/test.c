@@ -32,5 +32,6 @@ int main(void)
 	run_test(test_ft_memdel, "ft_memdel");
 	run_test(test_ft_strdel, "ft_strdel");
 	run_test(test_ft_strclr, "ft_strclr");
+	run_test(test_ft_striter, "ft_striter");
 	return (0);
 }
