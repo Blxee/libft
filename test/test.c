@@ -30,5 +30,6 @@ int main(void)
 	run_test(test_ft_memset, "ft_memset");
 	run_test(test_ft_atoi, "ft_atoi");
 	run_test(test_ft_memdel, "ft_memdel");
+	run_test(test_ft_strdel, "ft_strdel");
 	return (0);
 }
