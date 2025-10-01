@@ -14,5 +14,6 @@ int test_ft_memset(void);
 int test_ft_atoi(void);
 int test_ft_memdel(void);
 int test_ft_strdel(void);
+int test_ft_strclr(void);
 
 #endif
