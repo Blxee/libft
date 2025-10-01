@@ -16,5 +16,6 @@ int test_ft_memdel(void);
 int test_ft_strdel(void);
 int test_ft_strclr(void);
 int test_ft_striter(void);
+int test_ft_striteri(void);
 
 #endif

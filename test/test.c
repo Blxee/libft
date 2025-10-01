@@ -33,5 +33,6 @@ int main(void)
 	run_test(test_ft_strdel, "ft_strdel");
 	run_test(test_ft_strclr, "ft_strclr");
 	run_test(test_ft_striter, "ft_striter");
+	run_test(test_ft_striteri, "ft_striteri");
 	return (0);
 }
