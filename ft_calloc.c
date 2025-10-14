@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 15:13:21 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/14 15:22:27 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/14 15:41:50 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	unsigned char	*memory;
 	size_t			i;
 
-	memory = (unsigned char *)malloc(size);
+	memory = (unsigned char *)malloc(nmemb * size);
 	if (memory != NULL)
 	{
 		i = 0;
