@@ -1,13 +1,14 @@
 CC = cc
+CFLAGS = -Wall -Wextra -Werror
 NAME = libft.a
-SRCS = ft_isalpha.c ft_isdigit.c ft_islower.c ft_isprint.c ft_isupper.c ft_tolower.c ft_toupper.c
+SRCS = ft_isalpha.c ft_isdigit.c ft_isprint.c ft_tolower.c ft_toupper.c
 OBJS = $(SRCS:.c=.o)
 
 $(NAME): $(OBJS)
 	ar -rcs $@ $^
 
 %.o: %.c
-	$(CC) -c $< -o $@
+	$(CC) -c $(CFLAGS) $< -o $@
 
 all: $(NAME)
 
