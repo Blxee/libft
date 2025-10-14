@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 08:41:05 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/14 14:04:58 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/14 14:08:20 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
+void	*ft_memchr(const void *s, int c, size_t n);
 
 #endif
