@@ -12,7 +12,7 @@ $(NAME): $(OBJS)
 
 all: $(NAME)
 
-clean: $(OBJS)
+clean:
 	rm -f $^
 
 fclean: clean
