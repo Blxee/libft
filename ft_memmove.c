@@ -6,12 +6,13 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 09:47:13 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/14 09:51:55 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/14 10:34:02 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+// FIX: this function should not use malloc!!!!
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
 	size_t			i;
