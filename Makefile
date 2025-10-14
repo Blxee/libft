@@ -13,7 +13,7 @@ $(NAME): $(OBJS)
 all: $(NAME)
 
 clean:
-	rm -f $^
+	rm -f $(OBJS)
 
 fclean: clean
 	rm -f $(NAME)
