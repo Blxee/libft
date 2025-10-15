@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 08:41:05 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/15 09:12:01 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/15 09:20:47 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,6 @@ void	ft_putnbr_fd(int n, int fd);
 
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_front(t_list **lst, t_list *node);
+int		ft_lstsize(t_list *lst);
 
 #endif
