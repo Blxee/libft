@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 09:31:14 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/14 09:32:01 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/15 10:51:32 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ size_t	ft_strlen(const char *s)
 {
 	size_t	len;
 
+	if (s == NULL)
+		return (0);
 	len = 0;
 	while (s[len] != '\0')
 		len++;

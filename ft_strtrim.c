@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 16:13:59 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/14 20:16:54 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/15 10:47:09 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 	size_t	len;
 	char	*new;
 
+	if (s1 == NULL || set == NULL)
+		return ((char *)s1);
 	start_idx = 0;
 	while (ft_contains(set, s1[start_idx]))
 		start_idx++;
