@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 21:38:59 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/14 21:52:14 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/15 08:02:30 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ char	*ft_itoa(int n)
 	size_t	i;
 	char	*nbr;
 	long	num;
+	int		is_first_digit;
 
 	nbr = malloc(12);
 	if (nbr == NULL)
@@ -46,10 +47,11 @@ char	*ft_itoa(int n)
 		nbr[i++] = '-';
 		num = -num;
 	}
-	// FIX: handle when n = 0
-	while (num / 10 > 0)
+	is_first_digit = 1;
+	while (num > 0 || is_first_digit)
 	{
 		nbr[i++] = num % 10;
+		is_first_digit = 0;
 		num /= 10;
 	}
 	nbr[i] = '\0';
