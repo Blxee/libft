@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 16:13:59 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/15 10:47:09 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/16 19:36:48 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	end_idx = ft_strlen(s1) - 1;
 	while (end_idx >= start_idx && ft_contains(set, s1[end_idx]))
 		end_idx--;
-	len = end_idx - start_idx + 1;
+	len = end_idx - start_idx + 2;
 	new = malloc(len);
 	if (new == NULL)
 		return (NULL);
