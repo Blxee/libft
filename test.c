@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/16 16:14:00 by atahiri-          #+#    #+#             */
+/*   Updated: 2025/10/16 16:43:55 by atahiri-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "castrum.h"
 #include "libft.h"
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
 #include <ctype.h>
 
@@ -52,12 +65,24 @@ void test_ft_bzero(void)
 
 void test_ft_calloc(void)
 {
-
+	void *ours = calloc(5, sizeof(char));
+	void *theirs = ft_calloc(5, sizeof(char));
+	ASSERT_ARR_EQ(ours, theirs, 5);
+	free(ours);
+	free(theirs);
 }
 
 void test_ft_isalnum(void)
 {
-
+	ASSERT_EQ(ft_isalnum('a'), isalnum('a'));
+	ASSERT_EQ(ft_isalnum('Z'), isalnum('Z'));
+	ASSERT_EQ(ft_isalnum('1'), isalnum('1'));
+	ASSERT_EQ(ft_isalnum('%'), isalnum('%'));
+	ASSERT_EQ(ft_isalnum('0'), isalnum('0'));
+	ASSERT_EQ(ft_isalnum('9'), isalnum('9'));
+	ASSERT_EQ(ft_isalnum('!'), isalnum('!'));
+	ASSERT_EQ(ft_isalnum('\n'), isalnum('\n'));
+	ASSERT_EQ(ft_isalnum('\0'), isalnum('\0'));
 }
 
 void test_ft_isascii(void)
@@ -130,22 +155,128 @@ void test_ft_lstsize(void)
 
 void test_ft_memchr(void)
 {
-	ASSERT_EQ(ft_memchr("", 'a', 6), memchr("", 'a', 6));
+	ASSERT_EQ(ft_memchr("cbafgh", 'a', 6), memchr("cbafgh", 'a', 6));
+	ASSERT_EQ(ft_memchr("cbafgh", 'z', 6), memchr("cbafgh", 'z', 6));
+	ASSERT_EQ(ft_memchr("cbafgh", 'h', 3), memchr("cbafgh", 'h', 3));
+	ASSERT_EQ(ft_memchr("cbafgh", 'f', 3), memchr("cbafgh", 'f', 3));
+	ASSERT_EQ(ft_memchr("cbafgh", 'a', 3), memchr("cbafgh", 'a', 3));
+	ASSERT_EQ(ft_memchr("cbafgh", 'a', 0), memchr("cbafgh", 'a', 0));
+	ASSERT_EQ(ft_memchr(NULL, 'a', 0), memchr(NULL, 'a', 0));
 }
 
 void test_ft_memcmp(void)
 {
+	char *mem1, *mem2;
+	size_t n;
 
+	mem1 = "abc";
+	mem2 = "abc";
+	n = 3;
+	ASSERT_EQ(ft_memcmp(mem1, mem2, n), memcmp(mem1, mem2, n));
+
+	mem1 = "abc";
+	mem2 = "abcde";
+	n = 3;
+	ASSERT_EQ(ft_memcmp(mem1, mem2, n), memcmp(mem1, mem2, n));
+
+	mem1 = "abc";
+	mem2 = "def";
+	n = 3;
+	ASSERT_EQ(ft_memcmp(mem1, mem2, n), memcmp(mem1, mem2, n));
+
+	mem1 = "abc";
+	mem2 = "def";
+	n = 0;
+	ASSERT_EQ(ft_memcmp(mem1, mem2, n), memcmp(mem1, mem2, n));
+
+	mem1 = "abc";
+	mem2 = "abc";
+	n = 0;
+	ASSERT_EQ(ft_memcmp(mem1, mem2, n), memcmp(mem1, mem2, n));
+
+	mem1 = "abc";
+	mem2 = "abc";
+	n = 9;
+	ASSERT_EQ(ft_memcmp(mem1, mem2, n), memcmp(mem1, mem2, n));
+
+	mem1 = "abc";
+	mem2 = "def";
+	n = 9;
+	ASSERT_EQ(ft_memcmp(mem1, mem2, n), memcmp(mem1, mem2, n));
 }
 
 void test_ft_memcpy(void)
 {
+	char *target;
+	char mem1[32];
+	char mem2[32];
+	void *ret1;
+	void *ret2;
 
+
+	bzero(mem1, 32);
+	bzero(mem2, 32);
+	target = "hello";
+	ret1 = ft_memcpy(mem1, target, 5);
+	ASSERT_EQ(ret1, (void*)mem1);
+	ret2 = memcpy(mem2, target, 5);
+	ASSERT_EQ(ret2, (void*)mem2);
+	ASSERT_STR_EQ(mem1, mem2);
+
+	bzero(mem1, 32);
+	bzero(mem2, 32);
+	target = "hello";
+	ret1 = ft_memcpy(mem1, target, 3);
+	ASSERT_EQ(ret1, (void*)mem1);
+	ret2 = memcpy(mem2, target, 3);
+	ASSERT_EQ(ret2, (void*)mem2);
+	ASSERT_STR_EQ(mem1, mem2);
+
+	bzero(mem1, 32);
+	bzero(mem2, 32);
+	target = "hello";
+	ret1 = ft_memcpy(mem1, target, 0);
+	ASSERT_EQ(ret1, (void*)mem1);
+	ret2 = memcpy(mem2, target, 0);
+	ASSERT_EQ(ret2, (void*)mem2);
+	ASSERT_STR_EQ(mem1, mem2);
 }
 
 void test_ft_memmove(void)
 {
+	char *target;
+	char mem1[32];
+	char mem2[32];
+	void *ret1;
+	void *ret2;
 
+
+	bzero(mem1, 32);
+	bzero(mem2, 32);
+	target = "hello";
+	ret1 = ft_memmove(mem1, target, 5);
+	ASSERT_EQ(ret1, (void*)mem1);
+	ret2 = memmove(mem2, target, 5);
+	ASSERT_EQ(ret2, (void*)mem2);
+	ASSERT_STR_EQ(mem1, mem2);
+
+	bzero(mem1, 32);
+	bzero(mem2, 32);
+	target = "hello";
+	ret1 = ft_memmove(mem1, target, 3);
+	ASSERT_EQ(ret1, (void*)mem1);
+	ret2 = memmove(mem2, target, 3);
+	ASSERT_EQ(ret2, (void*)mem2);
+	ASSERT_STR_EQ(mem1, mem2);
+
+	bzero(mem1, 32);
+	bzero(mem2, 32);
+	target = "hello";
+	ret1 = ft_memmove(mem1, target, 0);
+	ASSERT_EQ(ret1, (void*)mem1);
+	ret2 = memmove(mem2, target, 0);
+	ASSERT_EQ(ret2, (void*)mem2);
+	ASSERT_STR_EQ(mem1, mem2);
 }
 
 void test_ft_memset(void)
