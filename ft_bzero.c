@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 09:38:43 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/15 10:42:58 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/16 17:30:24 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ void	ft_bzero(void *s, size_t n)
 {
 	size_t	i;
 
-	if (s == NULL)
-		return ;
 	i = 0;
 	while (i < n)
 	{
