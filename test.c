@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:14:00 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/16 16:43:55 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/16 18:57:02 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <ctype.h>
+#include <fcntl.h>
 
 void test_ft_isalpha()
 {
@@ -60,7 +61,26 @@ void test_ft_atoi(void)
 
 void test_ft_bzero(void)
 {
+	char mem[6];
+	char target[6];
 
+	memcpy(mem, "hello", 6);
+	memcpy(target, "hello", 6);
+	ft_bzero(mem, 6);
+	bzero(target, 6);
+	ASSERT_ARR_EQ(mem, target, 6);
+
+	memcpy(mem, "hello", 6);
+	memcpy(target, "hello", 6);
+	ft_bzero(mem, 2);
+	bzero(target, 2);
+	ASSERT_ARR_EQ(mem, target, 6);
+
+	memcpy(mem, "hello", 6);
+	memcpy(target, "hello", 6);
+	ft_bzero(mem, 0);
+	bzero(target, 0);
+	ASSERT_ARR_EQ(mem, target, 6);
 }
 
 void test_ft_calloc(void)
@@ -281,12 +301,44 @@ void test_ft_memmove(void)
 
 void test_ft_memset(void)
 {
+	char mem[6];
+	char target[6];
 
+	memcpy(mem, "hello", 6);
+	memcpy(target, "hello", 6);
+	ft_memset(mem, 'a', 6);
+	memset(target, 'a', 6);
+	ASSERT_ARR_EQ(mem, target, 6);
+
+	memcpy(mem, "hello", 6);
+	memcpy(target, "hello", 6);
+	ft_memset(mem, 'a', 2);
+	memset(target, 'a', 2);
+	ASSERT_ARR_EQ(mem, target, 6);
+
+	memcpy(mem, "hello", 6);
+	memcpy(target, "hello", 6);
+	ft_memset(mem, 9999, 0);
+	memset(target, 9999, 0);
+	ASSERT_ARR_EQ(mem, target, 6);
 }
 
 void test_ft_putchar_fd(void)
 {
+	char *file_name = "/tmp/_test_ft_putchar.txt";
+	int fd;
+	int len;
+	char buf[32];
 
+	fd = open(file_name, O_WRONLY | O_CREAT);
+	ft_putchar_fd('A', fd);
+	close(fd);
+
+	fd = open(file_name, O_RDONLY);
+	len = read(fd, buf, 32);
+	ASSERT_EQ(len, 1);
+	ASSERT_EQ(buf[0], 'A');
+	close(fd);
 }
 
 void test_ft_putendl_fd(void)
@@ -306,12 +358,33 @@ void test_ft_putstr_fd(void)
 
 void test_ft_split(void)
 {
+	char *phrase = "   hello   world from     1337   ";
+	char *target[4] = {"hello", "world", "from" "1337"};
+	char **splt;
+	int i;
 
+	return; // TODO: debug this!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	splt = ft_split(phrase, ' ');
+	for (i = 0; i < 4; i++)
+		ASSERT_STR_EQ(splt[i], target[i]);
+	ASSERT_EQ((void *)splt[i], NULL);
 }
 
 void test_ft_strchr(void)
 {
+	char *str;
 
+	str = "hello";
+	ASSERT_EQ(ft_strchr(str, 'h'), strchr(str, 'h'));
+
+	str = "hello";
+	ASSERT_EQ(ft_strchr(str, 'z'), strchr(str, 'z'));
+
+	str = "hello";
+	ASSERT_EQ(ft_strchr(str, 'o'), strchr(str, 'o'));
+
+	str = "hello";
+	ASSERT_EQ(ft_strchr(str, '\0'), strchr(str, '\0'));
 }
 
 void test_ft_strdup(void)
