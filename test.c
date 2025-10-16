@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:14:00 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/16 18:57:02 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/16 20:08:35 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -389,7 +389,16 @@ void test_ft_strchr(void)
 
 void test_ft_strdup(void)
 {
+	char *target;
+	char *dup1;
+	char *dup2;
 
+	target = "hello";
+	dup1 = ft_strdup(target);
+	dup2 = strdup(target);
+	ASSERT_STR_EQ(dup1, dup2);
+	free(dup1);
+	free(dup2);
 }
 
 void test_ft_striteri(void)
@@ -424,7 +433,39 @@ void test_ft_strmapi(void)
 
 void test_ft_strncmp(void)
 {
+	char *str1;
+	char *str2;
+	size_t n;
+	int out;
+	int expected;
 
+	str1 = "abc";
+	str2 = "abc";
+	n = 3;
+	out = ft_strncmp(str1, str2, n);
+	expected = strncmp(str1, str2, n);
+	ASSERT_EQ(out, expected);
+
+	str1 = "abcdef";
+	str2 = "abcDEF";
+	n = 3;
+	out = ft_strncmp(str1, str2, n);
+	expected = strncmp(str1, str2, n);
+	ASSERT_EQ(out, expected);
+
+	str1 = "abc";
+	str2 = "abc";
+	n = 6;
+	out = ft_strncmp(str1, str2, n);
+	expected = strncmp(str1, str2, n);
+	ASSERT_EQ(out, expected);
+
+	str1 = "abc";
+	str2 = "abC";
+	n = 3;
+	out = ft_strncmp(str1, str2, n);
+	expected = strncmp(str1, str2, n);
+	ASSERT_EQ(out, expected);
 }
 
 void test_ft_strnstr(void)
@@ -434,12 +475,37 @@ void test_ft_strnstr(void)
 
 void test_ft_strrchr(void)
 {
+	char *str;
 
+	str = "hello";
+	ASSERT_EQ(ft_strrchr(str, 'l'), strrchr(str, 'l'));
+
+	str = "hello";
+	ASSERT_EQ(ft_strrchr(str, 'z'), strrchr(str, 'z'));
+
+	str = "hello";
+	ASSERT_EQ(ft_strrchr(str, 'o'), strrchr(str, 'o'));
+
+	str = "hello";
+	ASSERT_EQ(ft_strrchr(str, '\0'), strrchr(str, '\0'));
 }
 
 void test_ft_strtrim(void)
 {
+	char *str = "1234555h311o2343";
+	char *target = "h311o";
+	char *sep = "0123456789";
+	char *out;
 
+	out = ft_strtrim(str, sep);
+	ASSERT_STR_EQ(out, target);
+	free(out);
+
+	str = "0123456789";
+	target = "";
+	out = ft_strtrim(str, sep);
+	ASSERT_STR_EQ(out, target);
+	free(out);
 }
 
 void test_ft_substr(void)
@@ -449,12 +515,72 @@ void test_ft_substr(void)
 
 void test_ft_tolower(void)
 {
+	char c;
 
+	c = 'A';
+	ASSERT_EQ(ft_tolower(c), tolower(c));
+
+	c = 'Z';
+	ASSERT_EQ(ft_tolower(c), tolower(c));
+
+	c = 'N';
+	ASSERT_EQ(ft_tolower(c), tolower(c));
+
+	c = 'a';
+	ASSERT_EQ(ft_tolower(c), tolower(c));
+
+	c = 'n';
+	ASSERT_EQ(ft_tolower(c), tolower(c));
+
+	c = 'z';
+	ASSERT_EQ(ft_tolower(c), tolower(c));
+
+	c = '1';
+	ASSERT_EQ(ft_tolower(c), tolower(c));
+
+	c = '9';
+	ASSERT_EQ(ft_tolower(c), tolower(c));
+
+	c = '\0';
+	ASSERT_EQ(ft_tolower(c), tolower(c));
+
+	c = '#';
+	ASSERT_EQ(ft_tolower(c), tolower(c));
 }
 
 void test_ft_toupper(void)
 {
+	char c;
 
+	c = 'A';
+	ASSERT_EQ(ft_toupper(c), toupper(c));
+
+	c = 'Z';
+	ASSERT_EQ(ft_toupper(c), toupper(c));
+
+	c = 'N';
+	ASSERT_EQ(ft_toupper(c), toupper(c));
+
+	c = 'a';
+	ASSERT_EQ(ft_toupper(c), toupper(c));
+
+	c = 'n';
+	ASSERT_EQ(ft_toupper(c), toupper(c));
+
+	c = 'z';
+	ASSERT_EQ(ft_toupper(c), toupper(c));
+
+	c = '1';
+	ASSERT_EQ(ft_toupper(c), toupper(c));
+
+	c = '9';
+	ASSERT_EQ(ft_toupper(c), toupper(c));
+
+	c = '\0';
+	ASSERT_EQ(ft_toupper(c), toupper(c));
+
+	c = '#';
+	ASSERT_EQ(ft_toupper(c), toupper(c));
 }
 
 
