@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 14:14:26 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/15 10:58:45 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/16 17:24:30 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	while (i < n)
 	{
 		if (mem1[i] != mem2[i])
-			break ;
+			return (mem1[i] - mem2[i]);
 		i++;
 	}
-	return (mem1[i] - mem2[i]);
+	return (0);
 }
