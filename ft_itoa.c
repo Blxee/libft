@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 21:38:59 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/15 08:02:30 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/17 08:26:27 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 static void	ft_strrev(char *str)
 {
-	size_t	i;
-	size_t	j;
+	int		i;
+	int		j;
 	char	tmp;
 
 	i = 0;
-	j = ft_strlen(str);
+	j = ft_strlen(str) - 1;
 	while (i < j)
 	{
 		tmp = str[i];
@@ -43,17 +43,16 @@ char	*ft_itoa(int n)
 	num = (long)n;
 	i = 0;
 	if (num < 0)
-	{
-		nbr[i++] = '-';
 		num = -num;
-	}
 	is_first_digit = 1;
 	while (num > 0 || is_first_digit)
 	{
-		nbr[i++] = num % 10;
+		nbr[i++] = '0' + num % 10;
 		is_first_digit = 0;
 		num /= 10;
 	}
+	if (n < 0)
+		nbr[i++] = '-';
 	nbr[i] = '\0';
 	ft_strrev(nbr);
 	return (nbr);
