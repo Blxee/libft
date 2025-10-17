@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I.
+CFLAGS = -Wall -Wextra -Werror -I. -g
 NAME = libft.a
 
 SRCS = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
@@ -25,6 +25,12 @@ all: $(NAME)
 
 bonus: OBJS += $(BONUS_OBJS)
 bonus: $(NAME)
+
+test: test.out
+	./test.out
+
+test.out: test.c $(NAME)
+	$(CC) $^ -o $@ -g -L. -lft
 
 clean:
 	rm -f $(OBJS)

@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:14:00 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/16 20:08:35 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/17 08:55:46 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,35 @@ void test_ft_isprint(void)
 
 void test_ft_itoa(void)
 {
+	char *num;
+
+	num = ft_itoa(123);
+	ASSERT_STR_EQ(num, "123");
+	free(num);
+
+	num = ft_itoa(-123);
+	ASSERT_STR_EQ(num, "-123");
+	free(num);
+
+	num = ft_itoa(1);
+	ASSERT_STR_EQ(num, "1");
+	free(num);
+
+	num = ft_itoa(-1);
+	ASSERT_STR_EQ(num, "-1");
+	free(num);
+
+	num = ft_itoa(0);
+	ASSERT_STR_EQ(num, "0");
+	free(num);
+
+	num = ft_itoa(2147483647);
+	ASSERT_STR_EQ(num, "2147483647");
+	free(num);
+
+	num = ft_itoa(-2147483648);
+	ASSERT_STR_EQ(num, "-2147483648");
+	free(num);
 }
 
 void test_ft_lstadd_back(void)
@@ -325,12 +354,12 @@ void test_ft_memset(void)
 
 void test_ft_putchar_fd(void)
 {
-	char *file_name = "/tmp/_test_ft_putchar.txt";
+	char *file_name = "/tmp/_test_ft_putchar_fd.txt";
 	int fd;
 	int len;
 	char buf[32];
 
-	fd = open(file_name, O_WRONLY | O_CREAT);
+	fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	ft_putchar_fd('A', fd);
 	close(fd);
 
@@ -343,17 +372,149 @@ void test_ft_putchar_fd(void)
 
 void test_ft_putendl_fd(void)
 {
+	char *file_name = "/tmp/_test_ft_putendl_fd.txt";
+	int fd;
+	int len;
+	char buf[32];
 
+	// test string = "hello"
+	fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0666);
+	ft_putendl_fd("hello", fd);
+	close(fd);
+
+	bzero(buf, 32);
+	fd = open(file_name, O_RDONLY);
+	len = read(fd, buf, 32);
+	ASSERT_EQ(len, 6);
+	ASSERT_STR_EQ(buf, "hello\n");
+	close(fd);
+
+	// test empty string
+	fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0666);
+	ft_putendl_fd("", fd);
+	close(fd);
+
+	bzero(buf, 32);
+	fd = open(file_name, O_RDONLY);
+	len = read(fd, buf, 32);
+	ASSERT_EQ(len, 1);
+	ASSERT_STR_EQ(buf, "\n");
+	close(fd);
 }
 
 void test_ft_putnbr_fd(void)
 {
+	char *file_name = "/tmp/_test_ft_putnbr_fd.txt";
+	int fd;
+	int len;
+	char buf[32];
+	int nbr;
+	char *target;
 
+	nbr = 123;
+	target = ft_itoa(nbr);
+	fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0666);
+	ft_putnbr_fd(nbr, fd);
+	close(fd);
+
+	bzero(buf, 32);
+	fd = open(file_name, O_RDONLY);
+	len = read(fd, buf, 32);
+	ASSERT_EQ(len, strlen(target));
+	ASSERT_STR_EQ(buf, target);
+	close(fd);
+	free(target);
+
+	nbr = -123;
+	target = ft_itoa(nbr);
+	fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0666);
+	ft_putnbr_fd(nbr, fd);
+	close(fd);
+
+	bzero(buf, 32);
+	fd = open(file_name, O_RDONLY);
+	len = read(fd, buf, 32);
+	ASSERT_EQ(len, strlen(target));
+	ASSERT_STR_EQ(buf, target);
+	close(fd);
+	free(target);
+
+	nbr = 0;
+	target = ft_itoa(nbr);
+	fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0666);
+	ft_putnbr_fd(nbr, fd);
+	close(fd);
+
+	bzero(buf, 32);
+	fd = open(file_name, O_RDONLY);
+	len = read(fd, buf, 32);
+	ASSERT_EQ(len, strlen(target));
+	ASSERT_STR_EQ(buf, target);
+	close(fd);
+	free(target);
+
+	nbr = -2147483648;
+	target = ft_itoa(nbr);
+	fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0666);
+	ft_putnbr_fd(nbr, fd);
+	close(fd);
+
+	bzero(buf, 32);
+	fd = open(file_name, O_RDONLY);
+	len = read(fd, buf, 32);
+	ASSERT_EQ(len, strlen(target));
+	ASSERT_STR_EQ(buf, target);
+	close(fd);
+	free(target);
+
+	nbr = 2147483647;
+	target = ft_itoa(nbr);
+	fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0666);
+	ft_putnbr_fd(nbr, fd);
+	close(fd);
+
+	bzero(buf, 32);
+	fd = open(file_name, O_RDONLY);
+	len = read(fd, buf, 32);
+	ASSERT_EQ(len, strlen(target));
+	ASSERT_STR_EQ(buf, target);
+	close(fd);
+	free(target);
 }
 
 void test_ft_putstr_fd(void)
 {
+	char *file_name = "/tmp/_test_ft_putstr_fd.txt";
+	int fd;
+	int len;
+	char buf[32];
+	char *str;
 
+	// test string = "hello"
+	str = "hello";
+	fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0666);
+	ft_putstr_fd(str, fd);
+	close(fd);
+
+	bzero(buf, 32);
+	fd = open(file_name, O_RDONLY);
+	len = read(fd, buf, 32);
+	ASSERT_EQ(len, 5);
+	ASSERT_STR_EQ(buf, str);
+	close(fd);
+
+	// test empty string
+	str = "";
+	fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0666);
+	ft_putstr_fd(str, fd);
+	close(fd);
+
+	bzero(buf, 32);
+	fd = open(file_name, O_RDONLY);
+	len = read(fd, buf, 32);
+	ASSERT_EQ(len, 0);
+	ASSERT_STR_EQ(buf, str);
+	close(fd);
 }
 
 void test_ft_split(void)

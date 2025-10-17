@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 07:56:44 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/16 12:11:54 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/16 19:09:15 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void _test_summary(void)
 		long:			sprintf(g_msg_buf + g_buf_idx, "%ld", (long)exp), \
 		unsigned long:	sprintf(g_msg_buf + g_buf_idx, "%lu", (unsigned long)exp), \
 		char:			sprintf(g_msg_buf + g_buf_idx, "%c", (char)exp), \
+		char *:			sprintf(g_msg_buf + g_buf_idx, "%s", (char *)exp), \
 		unsigned char:	sprintf(g_msg_buf + g_buf_idx, "%hhx", (unsigned char)exp), \
 		void *:			sprintf(g_msg_buf + g_buf_idx, "%p", (void *)(long)exp) \
 	)
@@ -205,7 +206,7 @@ MAKE_PRINT_ARRAY(uint64_t)
 	}
 
 #define ASSERT_STR_EQ(lhs, rhs) \
-	if (strcmp(lhs, rhs) != 0) { \
+	if ((lhs && !rhs) || (!lhs && rhs) || strcmp(lhs, rhs) != 0) { \
 		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, "\t-> expected \x1b[1m%s\x1b[0m: ", #lhs); \
 		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, "%s", lhs); \
 		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, " to equal \x1b[1m%s\x1b[0m: ", #rhs); \
