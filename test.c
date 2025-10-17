@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:14:00 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/17 09:16:53 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/17 09:39:47 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -542,12 +542,28 @@ void test_ft_strlcat(void)
 
 void test_ft_strlcpy(void)
 {
+	char *srcs[] =        {"hello", "hey", "hello", "", "hello"};
+	size_t sizes[] =      {6,       6,      4,      5,   0     };
+	char *dest_target[] = {"hello", "hey", "hel",   "",  ""    };
+	size_t ret;
+	char dest[64];
 
+	for (int i = 0; i < sizeof(srcs) / sizeof(*srcs); i++)
+	{
+		ret = ft_strlcpy(dest, srcs[i], sizes[i]);
+		ASSERT_STR_EQ(dest, dest_target[i]);
+		ASSERT_EQ(ret, strlen(srcs[i])); // strlcat always returns the length of src
+	}
 }
 
 void test_ft_strlen(void)
 {
+	char *strs[] = {"hello", "", "\0", "\x1b"};
 
+	for (int i = 0; i < sizeof(strs) / sizeof(*strs); i++)
+	{
+		ASSERT_EQ(ft_strlen(strs[i]), strlen(strs[i]));
+	}
 }
 
 char _strmapi_foo(unsigned int i, char c)
