@@ -23,8 +23,8 @@ $(NAME): $(OBJS)
 
 all: $(NAME)
 
-bonus: OBJS += $(BONUS_OBJS)
-bonus: $(NAME)
+bonus: $(NAME) $(BONUS_OBJS)
+	ar -rcs $(NAME) $(BONUS_OBJS)
 
 test: test.out
 	./test.out
@@ -33,7 +33,7 @@ test.out: test.c $(NAME)
 	$(CC) $^ -o $@ -g -lbsd -L. -lft
 
 clean:
-	rm -f $(OBJS)
+	rm -f $(OBJS) $(BONUS_OBJS)
 
 fclean: clean
 	rm -f $(NAME)
