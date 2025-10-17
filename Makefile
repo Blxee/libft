@@ -30,7 +30,7 @@ test: test.out
 	./test.out
 
 test.out: test.c $(NAME)
-	$(CC) $^ -o $@ -g -L. -lft
+	$(CC) $^ -o $@ -g -lbsd -L. -lft
 
 clean:
 	rm -f $(OBJS)

@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:14:00 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/17 09:45:44 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/17 10:22:23 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "libft.h"
 #include <stdlib.h>
 #include <string.h>
+#include <bsd/string.h>
 #include <unistd.h>
 #include <ctype.h>
 #include <fcntl.h>
@@ -636,7 +637,14 @@ void test_ft_strncmp(void)
 
 void test_ft_strnstr(void)
 {
+	char *haystacks[] = {"hello", "hello", "hello", "hello", "hello", "hello",    "hello",  "hello", "hello",  "hello", "hello", "hello", "hello", "hello", "hello", "hello",  "hello", "hello",  "hello", "hello", "hello", "hello", "hello", "hello",    "hello",  "hello", "hello",  };
+	char *needles[] =   {"he",    "hello", "llo",   "",      "zzz",   "zhel",     "helloz", "helz",  "zhello", "he",    "hello", "llo",   "",      "zzz",   "zhel",  "helloz", "helz",  "zhello", "he",    "hello", "llo",   "",      "zzz",   "zhel",     "helloz", "helz",  "zhello", };
+	size_t sizes[] =    {5,       5,       5,       5,       5,       5,          5,        5,       5,        3,       3,       3,       3,       3,       3,       3,        3,       3,        10,      10,      10,      10,      10,      10,         10,       10,      10,       };
 
+	for (int i = 0; i < sizeof(haystacks) / sizeof(*haystacks); i++)
+	{
+		ASSERT_EQ(ft_strnstr(haystacks[i], needles[i], sizes[i]), strnstr(haystacks[i], needles[i], sizes[i]));
+	}	
 }
 
 void test_ft_strrchr(void)
