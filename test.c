@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:14:00 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/17 10:27:03 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/17 10:54:12 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -641,10 +641,11 @@ void test_ft_strncmp(void)
 
 void test_ft_strnstr(void)
 {
-	char *haystacks[] = {"hello", "hello", "hello", "hello", "hello", "hello",    "hello",  "hello", "hello",  "hello", "hello", "hello", "hello", "hello", "hello", "hello",  "hello", "hello",  "hello", "hello", "hello", "hello", "hello", "hello",    "hello",  "hello", "hello",  };
-	char *needles[] =   {"he",    "hello", "llo",   "",      "zzz",   "zhel",     "helloz", "helz",  "zhello", "he",    "hello", "llo",   "",      "zzz",   "zhel",  "helloz", "helz",  "zhello", "he",    "hello", "llo",   "",      "zzz",   "zhel",     "helloz", "helz",  "zhello", };
-	size_t sizes[] =    {5,       5,       5,       5,       5,       5,          5,        5,       5,        3,       3,       3,       3,       3,       3,       3,        3,       3,        10,      10,      10,      10,      10,      10,         10,       10,      10,       };
+	char *haystacks[] = {"hello", "hello", "hello", "hello", "hello", "hello",    "hello",  "hello", "hello",  "hello", "hello", "hello", "hello", "hello", "hello", "hello",  "hello", "hello",  "hello", "hello", "hello", "hello", "hello", "hello",    "hello",  "hello", "hello",  "", "", "",    "",    ""};
+	char *needles[] =   {"he",    "hello", "llo",   "",      "zzz",   "zhel",     "helloz", "helz",  "zhello", "he",    "hello", "llo",   "",      "zzz",   "zhel",  "helloz", "helz",  "zhello", "he",    "hello", "llo",   "",      "zzz",   "zhel",     "helloz", "helz",  "zhello", "", "", "hey", "hey", "hey"};
+	size_t sizes[] =    {5,       5,       5,       5,       5,       5,          5,        5,       5,        3,       3,       3,       3,       3,       3,       3,        3,       3,        10,      10,      10,      10,      10,      10,         10,       10,      10,       0,  5,  0,     3,     5};
 
+	// strnstr(NULL, "", 1);
 	for (int i = 0; i < sizeof(haystacks) / sizeof(*haystacks); i++)
 	{
 		ASSERT_EQ(ft_strnstr(haystacks[i], needles[i], sizes[i]), strnstr(haystacks[i], needles[i], sizes[i]));
