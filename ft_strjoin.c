@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 16:03:59 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/15 10:54:01 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/17 09:47:12 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	new = malloc(len);
 	if (new == NULL)
 		return (NULL);
-	new[0] = '\0';
-	ft_strlcat(new, s1, len);
+	ft_strlcpy(new, s1, len);
 	ft_strlcat(new, s2, len);
 	return (new);
 }

@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 13:27:04 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/15 10:52:44 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/17 09:51:48 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 		dst[dstlen + i] = src[i];
 		i++;
 	}
-	dst[i] = '\0';
+	dst[dstlen + i] = '\0';
 	return (dstlen + srclen);
 }

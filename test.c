@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:14:00 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/17 09:39:47 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/17 09:45:44 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -532,7 +532,17 @@ void test_ft_striteri(void)
 
 void test_ft_strjoin(void)
 {
+	char *strs1[] =  {"he",    "hey", ""};
+	char *strs2[] =  {"llo",   "",    "hi"};
+	char *target[] = {"hello", "hey", "hi"};
+	char *out;
 
+	for (int i = 0; i < sizeof(strs1) / sizeof(*strs1); i++)
+	{
+		out = ft_strjoin(strs1[i], strs2[i]);
+		ASSERT_STR_EQ(out, target[i]);
+		free(out);
+	}
 }
 
 void test_ft_strlcat(void)
