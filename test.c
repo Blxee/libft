@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:14:00 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/17 08:55:46 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/17 09:16:53 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -408,78 +408,24 @@ void test_ft_putnbr_fd(void)
 	int fd;
 	int len;
 	char buf[32];
-	int nbr;
 	char *target;
+	int nums[] = {123, -123, 0, 2147483647, -2147483648};
 
-	nbr = 123;
-	target = ft_itoa(nbr);
-	fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0666);
-	ft_putnbr_fd(nbr, fd);
-	close(fd);
+	for (int i = 0; i < sizeof(nums) / sizeof(*nums); i++)
+	{
+		target = ft_itoa(nums[i]);
+		fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0666);
+		ft_putnbr_fd(nums[i], fd);
+		close(fd);
 
-	bzero(buf, 32);
-	fd = open(file_name, O_RDONLY);
-	len = read(fd, buf, 32);
-	ASSERT_EQ(len, strlen(target));
-	ASSERT_STR_EQ(buf, target);
-	close(fd);
-	free(target);
-
-	nbr = -123;
-	target = ft_itoa(nbr);
-	fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0666);
-	ft_putnbr_fd(nbr, fd);
-	close(fd);
-
-	bzero(buf, 32);
-	fd = open(file_name, O_RDONLY);
-	len = read(fd, buf, 32);
-	ASSERT_EQ(len, strlen(target));
-	ASSERT_STR_EQ(buf, target);
-	close(fd);
-	free(target);
-
-	nbr = 0;
-	target = ft_itoa(nbr);
-	fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0666);
-	ft_putnbr_fd(nbr, fd);
-	close(fd);
-
-	bzero(buf, 32);
-	fd = open(file_name, O_RDONLY);
-	len = read(fd, buf, 32);
-	ASSERT_EQ(len, strlen(target));
-	ASSERT_STR_EQ(buf, target);
-	close(fd);
-	free(target);
-
-	nbr = -2147483648;
-	target = ft_itoa(nbr);
-	fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0666);
-	ft_putnbr_fd(nbr, fd);
-	close(fd);
-
-	bzero(buf, 32);
-	fd = open(file_name, O_RDONLY);
-	len = read(fd, buf, 32);
-	ASSERT_EQ(len, strlen(target));
-	ASSERT_STR_EQ(buf, target);
-	close(fd);
-	free(target);
-
-	nbr = 2147483647;
-	target = ft_itoa(nbr);
-	fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0666);
-	ft_putnbr_fd(nbr, fd);
-	close(fd);
-
-	bzero(buf, 32);
-	fd = open(file_name, O_RDONLY);
-	len = read(fd, buf, 32);
-	ASSERT_EQ(len, strlen(target));
-	ASSERT_STR_EQ(buf, target);
-	close(fd);
-	free(target);
+		bzero(buf, 32);
+		fd = open(file_name, O_RDONLY);
+		len = read(fd, buf, 32);
+		ASSERT_EQ(len, strlen(target));
+		ASSERT_STR_EQ(buf, target);
+		close(fd);
+		free(target);
+	}
 }
 
 void test_ft_putstr_fd(void)
@@ -562,8 +508,25 @@ void test_ft_strdup(void)
 	free(dup2);
 }
 
+void _striteri_foo(unsigned int i, char *c)
+{
+	if (i & 1)
+		*c = '0' + i;
+}
+
 void test_ft_striteri(void)
 {
+	char *str;
+
+	str = strdup("hello");
+	ft_striteri(str, &_striteri_foo);
+	ASSERT_STR_EQ(str, "h1l3o");
+	free(str);
+
+	str = strdup("");
+	ft_striteri(str, &_striteri_foo);
+	ASSERT_STR_EQ(str, "");
+	free(str);
 
 }
 
@@ -587,9 +550,25 @@ void test_ft_strlen(void)
 
 }
 
+char _strmapi_foo(unsigned int i, char c)
+{
+	if (i & 1)
+		return ('0' + i);
+	else
+		return (c);
+}
+
 void test_ft_strmapi(void)
 {
+	char *result;
 
+	result = ft_strmapi("hello", &_strmapi_foo);
+	ASSERT_STR_EQ(result, "h1l3o");
+	free(result);
+
+	result = ft_strmapi("", &_strmapi_foo);
+	ASSERT_STR_EQ(result, "");
+	free(result);
 }
 
 void test_ft_strncmp(void)
