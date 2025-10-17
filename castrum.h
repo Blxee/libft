@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 07:56:44 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/16 19:09:15 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/17 18:52:13 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,19 @@ void _test_summary(void)
 
 #define PRINT_TYPE(exp) \
 	_Generic((exp), \
-		int:			sprintf(g_msg_buf + g_buf_idx, "%d", (int)exp), \
-		unsigned int:	sprintf(g_msg_buf + g_buf_idx, "%u", (unsigned int)exp), \
-		long:			sprintf(g_msg_buf + g_buf_idx, "%ld", (long)exp), \
+		int:			sprintf(g_msg_buf + g_buf_idx, "%d", (int)(intptr_t)exp), \
+		unsigned int:	sprintf(g_msg_buf + g_buf_idx, "%u", (unsigned int)(intptr_t)exp), \
+		short:			sprintf(g_msg_buf + g_buf_idx, "%hd", (short)(intptr_t)exp), \
+		unsigned short:	sprintf(g_msg_buf + g_buf_idx, "%hu", (unsigned short)(intptr_t)exp), \
+		long:			sprintf(g_msg_buf + g_buf_idx, "%ld", (long)(intptr_t)exp), \
 		unsigned long:	sprintf(g_msg_buf + g_buf_idx, "%lu", (unsigned long)exp), \
-		char:			sprintf(g_msg_buf + g_buf_idx, "%c", (char)exp), \
-		char *:			sprintf(g_msg_buf + g_buf_idx, "%s", (char *)exp), \
-		unsigned char:	sprintf(g_msg_buf + g_buf_idx, "%hhx", (unsigned char)exp), \
-		void *:			sprintf(g_msg_buf + g_buf_idx, "%p", (void *)(long)exp) \
+		char:			sprintf(g_msg_buf + g_buf_idx, "%c", (char)(intptr_t)exp), \
+		unsigned char:	sprintf(g_msg_buf + g_buf_idx, "%hhx", (unsigned char)(intptr_t)exp), \
+		float:			sprintf(g_msg_buf + g_buf_idx, "%.2f", (float)(intptr_t)exp), \
+		double:			sprintf(g_msg_buf + g_buf_idx, "%.2f", (double)(intptr_t)exp), \
+		long double:	sprintf(g_msg_buf + g_buf_idx, "%.2Lf", (long double)(intptr_t)exp), \
+		char *:			sprintf(g_msg_buf + g_buf_idx, "%s", (char *)(intptr_t)exp), \
+		default:		sprintf(g_msg_buf + g_buf_idx, "%p", (void *)(intptr_t)exp) \
 	)
 
 #define MAKE_PRINT_ARRAY(type) \
@@ -110,7 +115,7 @@ MAKE_PRINT_ARRAY(uint64_t)
 
 #define ASSERT_TRUE(exp) \
 	if (!exp) { \
-		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, "\t-> expected \x1b[1m%s\x1b[0m: ", #exp); \
+		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, "\t%s:%d -> expected \x1b[1m%s\x1b[0m: ", __FILE__, __LINE__, #exp); \
 		g_buf_idx += PRINT_TYPE(exp); \
 		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, " to be true!\n"); \
 		g_test_failed++; \
@@ -119,7 +124,7 @@ MAKE_PRINT_ARRAY(uint64_t)
 
 #define ASSERT_FALSE(exp) \
 	if (exp) { \
-		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, "\t-> expected \x1b[1m%s\x1b[0m: ", #exp); \
+		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, "\t%s:%d -> expected \x1b[1m%s\x1b[0m: ", __FILE__, __LINE__, #exp); \
 		g_buf_idx += PRINT_TYPE(exp); \
 		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, " to be false!\n"); \
 		g_test_failed++; \
@@ -127,7 +132,7 @@ MAKE_PRINT_ARRAY(uint64_t)
 
 #define ASSERT_EQ(lhs, rhs) \
 	if (lhs != rhs) { \
-		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, "\t-> expected \x1b[1m%s\x1b[0m: ", #lhs); \
+		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, "\t%s:%d -> expected \x1b[1m%s\x1b[0m: ", __FILE__, __LINE__, #lhs); \
 		g_buf_idx += PRINT_TYPE(lhs); \
 		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, " to equal \x1b[1m%s\x1b[0m: ", #rhs); \
 		g_buf_idx += PRINT_TYPE(rhs); \
@@ -137,7 +142,7 @@ MAKE_PRINT_ARRAY(uint64_t)
 
 #define ASSERT_NE(lhs, rhs) \
 	if (lhs == rhs) { \
-		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, "\t-> expected \x1b[1m%s\x1b[0m: ", #lhs); \
+		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, "\t%s:%d -> expected \x1b[1m%s\x1b[0m: ", __FILE__, __LINE__, #lhs); \
 		g_buf_idx += PRINT_TYPE(lhs); \
 		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, " to not equal \x1b[1m%s\x1b[0m: ", #rhs); \
 		g_buf_idx += PRINT_TYPE(rhs); \
@@ -147,7 +152,7 @@ MAKE_PRINT_ARRAY(uint64_t)
 
 #define ASSERT_GT(lhs, rhs) \
 	if (lhs <= rhs) { \
-		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, "\t-> expected \x1b[1m%s\x1b[0m: ", #lhs); \
+		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, "\t%s:%d -> expected \x1b[1m%s\x1b[0m: ", __FILE__, __LINE__, #lhs); \
 		g_buf_idx += PRINT_TYPE(lhs); \
 		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, " to be greater than \x1b[1m%s\x1b[0m: ", #rhs); \
 		g_buf_idx += PRINT_TYPE(rhs); \
@@ -157,7 +162,7 @@ MAKE_PRINT_ARRAY(uint64_t)
 
 #define ASSERT_GE(lhs, rhs) \
 	if (lhs < rhs) { \
-		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, "\t-> expected \x1b[1m%s\x1b[0m: ", #lhs); \
+		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, "\t%s:%d -> expected \x1b[1m%s\x1b[0m: ", __FILE__, __LINE__, #lhs); \
 		g_buf_idx += PRINT_TYPE(lhs); \
 		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, " to be greater or equal to \x1b[1m%s\x1b[0m: ", #rhs); \
 		g_buf_idx += PRINT_TYPE(rhs); \
@@ -167,7 +172,7 @@ MAKE_PRINT_ARRAY(uint64_t)
 
 #define ASSERT_LT(lhs, rhs) \
 	if (lhs >= rhs) { \
-		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, "\t-> expected \x1b[1m%s\x1b[0m: ", #lhs); \
+		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, "\t%s:%d -> expected \x1b[1m%s\x1b[0m: ", __FILE__, __LINE__, #lhs); \
 		g_buf_idx += PRINT_TYPE(lhs); \
 		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, " to be less than \x1b[1m%s\x1b[0m: ", #rhs); \
 		g_buf_idx += PRINT_TYPE(rhs); \
@@ -177,7 +182,7 @@ MAKE_PRINT_ARRAY(uint64_t)
 
 #define ASSERT_LE(lhs, rhs) \
 	if (lhs > rhs) { \
-		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, "\t-> expected \x1b[1m%s\x1b[0m: ", #lhs); \
+		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, "\t%s:%d -> expected \x1b[1m%s\x1b[0m: ", __FILE__, __LINE__, #lhs); \
 		g_buf_idx += PRINT_TYPE(lhs); \
 		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, " to be less or equal to \x1b[1m%s\x1b[0m: ", #rhs); \
 		g_buf_idx += PRINT_TYPE(rhs); \
@@ -187,7 +192,7 @@ MAKE_PRINT_ARRAY(uint64_t)
 
 #define ASSERT_ARR_EQ(lhs, rhs, size) \
 	if (lhs == NULL || rhs == NULL || memcmp(lhs, rhs, size * sizeof(*lhs)) != 0) { \
-		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, "\t-> expected \x1b[1m%s\x1b[0m: ", #lhs); \
+		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, "\t%s:%d -> expected \x1b[1m%s\x1b[0m: ", __FILE__, __LINE__, #lhs); \
 		PRINT_ARRAY(lhs, size); \
 		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, " to equal \x1b[1m%s\x1b[0m: ", #rhs); \
 		PRINT_ARRAY(rhs, size); \
@@ -197,7 +202,7 @@ MAKE_PRINT_ARRAY(uint64_t)
 
 #define ASSERT_ARR_NE(lhs, rhs, size) \
 	if (lhs == NULL || rhs == NULL || memcmp(lhs, rhs, size * sizeof(*lhs)) == 0) { \
-		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, "\t-> expected \x1b[1m%s\x1b[0m: ", #lhs); \
+		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, "\t%s:%d -> expected \x1b[1m%s\x1b[0m: ", __FILE__, __LINE__, #lhs); \
 		PRINT_ARRAY(lhs, size); \
 		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, " to not equal \x1b[1m%s\x1b[0m: ", #rhs); \
 		PRINT_ARRAY(rhs, size); \
@@ -206,8 +211,8 @@ MAKE_PRINT_ARRAY(uint64_t)
 	}
 
 #define ASSERT_STR_EQ(lhs, rhs) \
-	if ((lhs && !rhs) || (!lhs && rhs) || strcmp(lhs, rhs) != 0) { \
-		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, "\t-> expected \x1b[1m%s\x1b[0m: ", #lhs); \
+	if (!lhs || !rhs || strcmp(lhs, rhs) != 0) { \
+		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, "\t%s:%d -> expected \x1b[1m%s\x1b[0m: ", __FILE__, __LINE__, #lhs); \
 		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, "%s", lhs); \
 		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, " to equal \x1b[1m%s\x1b[0m: ", #rhs); \
 		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, "%s", rhs); \
@@ -216,11 +221,31 @@ MAKE_PRINT_ARRAY(uint64_t)
 	}
 
 #define ASSERT_STR_NE(lhs, rhs) \
-	if (strcmp(lhs, rhs) == 0) { \
-		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, "\t-> expected \x1b[1m%s\x1b[0m: ", #lhs); \
+	if (!lhs || !rhs || strcmp(lhs, rhs) == 0) { \
+		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, "\t%s:%d -> expected \x1b[1m%s\x1b[0m: ", __FILE__, __LINE__, #lhs); \
 		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, "%s", lhs); \
 		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, " to not equal \x1b[1m%s\x1b[0m: ", #rhs); \
 		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, "%s", rhs); \
+		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, "\n"); \
+		g_test_failed++; \
+	}
+
+#define ASSERT_MEM_EQ(lhs, rhs, size) \
+	if (!lhs || !rhs || memcmp(lhs, rhs, size) != 0) { \
+		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, "\t%s:%d -> expected \x1b[1m%s\x1b[0m: ", __FILE__, __LINE__, #lhs); \
+		PRINT_ARRAY((unsigned char *)lhs, size); \
+		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, " to equal \x1b[1m%s\x1b[0m: ", #rhs); \
+		PRINT_ARRAY((unsigned char *)rhs, size); \
+		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, "\n"); \
+		g_test_failed++; \
+	}
+
+#define ASSERT_MEM_NE(lhs, rhs, size) \
+	if (!lhs || !rhs || memcmp(lhs, rhs, size) == 0) { \
+		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, "\t%s:%d -> expected \x1b[1m%s\x1b[0m: ", __FILE__, __LINE__, #lhs); \
+		PRINT_ARRAY((unsigned char *)lhs, size); \
+		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, " to equal \x1b[1m%s\x1b[0m: ", #rhs); \
+		PRINT_ARRAY((unsigned char *)rhs, size); \
 		g_buf_idx += sprintf(g_msg_buf + g_buf_idx, "\n"); \
 		g_test_failed++; \
 	}

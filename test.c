@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:14:00 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/17 10:54:12 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/17 19:42:12 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,7 @@ void test_ft_lstmap(void)
 
 void test_ft_lstnew(void)
 {
+	t_list *lst = ft_lstnew("hello");
 
 }
 
@@ -537,9 +538,9 @@ void test_ft_striteri(void)
 
 void test_ft_strjoin(void)
 {
-	char *strs1[] =  {"he",    "hey", ""};
-	char *strs2[] =  {"llo",   "",    "hi"};
-	char *target[] = {"hello", "hey", "hi"};
+	char *strs1[] =  {"he",    "hey", "",   "hello", NULL,    NULL};
+	char *strs2[] =  {"llo",   "",    "hi", NULL,    "hello", NULL};
+	char *target[] = {"hello", "hey", "hi", "hello", "hello", ""};
 	char *out;
 
 	for (int i = 0; i < sizeof(strs1) / sizeof(*strs1); i++)
@@ -557,17 +558,18 @@ void test_ft_strlcat(void)
 
 void test_ft_strlcpy(void)
 {
-	char *srcs[] =        {"hello", "hey", "hello", "", "hello"};
-	size_t sizes[] =      {6,       6,      4,      5,   0     };
-	char *dest_target[] = {"hello", "hey", "hel",   "",  ""    };
-	size_t ret;
-	char dest[64];
+	char *srcs[] =   {"hello", "hello", "",      ""};
+	char *dests[] =  {"world", "",      "world", ""};
+	size_t sizes[] = {64,      64,      64,      64};
+	char dest1[64];
+	char dest2[64];
 
 	for (int i = 0; i < sizeof(srcs) / sizeof(*srcs); i++)
 	{
-		ret = ft_strlcpy(dest, srcs[i], sizes[i]);
-		ASSERT_STR_EQ(dest, dest_target[i]);
-		ASSERT_EQ(ret, strlen(srcs[i])); // strlcat always returns the length of src
+		strlcpy(dest1, dests[i], 64); // this is just for populating the dest1 buffer
+		strlcpy(dest2, dests[i], 64); // this is just for populating the dest2 buffer
+		ASSERT_EQ(ft_strlcpy(dest1, srcs[i], sizes[i]), strlcpy(dest2, srcs[i], sizes[i]));
+		ASSERT_STR_EQ(dest1, dest2);
 	}
 }
 

@@ -29,8 +29,8 @@ bonus: $(NAME) $(BONUS_OBJS)
 test: test.out
 	./test.out
 
-test.out: test.c $(NAME)
-	$(CC) $^ -o $@ -g -lbsd -L. -lft
+test.out: test.c bonus
+	$(CC) test.c -o $@ -g -lbsd -L. -lft
 
 clean:
 	rm -f $(OBJS) $(BONUS_OBJS)
