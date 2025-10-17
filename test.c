@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:14:00 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/17 10:22:23 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/17 10:27:03 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,10 @@ void test_ft_atoi(void)
 	ASSERT_EQ(ft_atoi(""), atoi(""));
 	ASSERT_EQ(ft_atoi("-+123"), atoi("-+123"));
 	ASSERT_EQ(ft_atoi("+123"), atoi("+123"));
+	ASSERT_EQ(ft_atoi("2147483647"), atoi("2147483647"));
+	ASSERT_EQ(ft_atoi("-2147483648"), atoi("-2147483648"));
+	ASSERT_EQ(ft_atoi("-2147483649"), atoi("-2147483649"));
+	ASSERT_EQ(ft_atoi("2147483648"), atoi("2147483648"));
 }
 
 void test_ft_bzero(void)
