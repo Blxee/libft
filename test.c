@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:14:00 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/17 20:56:05 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/17 20:59:45 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -553,7 +553,19 @@ void test_ft_strjoin(void)
 
 void test_ft_strlcat(void)
 {
+	char *srcs[] =   {"hello", "hello", "",      "", "hello", "hello", "hello", "hello", "hello", "hello", "", "hey", "", "hello", "hello"};
+	char *dests[] =  {"world", "",      "world", "", "world", "world", "world", "world", "world", "world", "", "",    "", "world", ""};
+	size_t sizes[] = {64,      64,      64,      64, 11,      10,      7,       5,       3,       0,       0,  0,     0,  3,       2};
+	char dest1[64];
+	char dest2[64];
 
+	for (int i = 0; i < sizeof(srcs) / sizeof(*srcs); i++)
+	{
+		strlcpy(dest1, dests[i], 64); // this is just for populating the dest1 buffer
+		strlcpy(dest2, dests[i], 64); // this is just for populating the dest2 buffer
+		ASSERT_EQ(ft_strlcat(dest1, srcs[i], sizes[i]), strlcat(dest2, srcs[i], sizes[i]));
+		ASSERT_STR_EQ(dest1, dest2);
+	}
 }
 
 void test_ft_strlcpy(void)
