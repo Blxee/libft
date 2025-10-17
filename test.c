@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:14:00 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/17 19:42:12 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/17 20:56:05 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -558,9 +558,9 @@ void test_ft_strlcat(void)
 
 void test_ft_strlcpy(void)
 {
-	char *srcs[] =   {"hello", "hello", "",      ""};
-	char *dests[] =  {"world", "",      "world", ""};
-	size_t sizes[] = {64,      64,      64,      64};
+	char *srcs[] =   {"hello", "hello", "",      "", "hello", "hello", "hello", "hello", "hello", "hello", "", "hey", ""};
+	char *dests[] =  {"world", "",      "world", "", "world", "world", "world", "world", "world", "world", "", "",    ""};
+	size_t sizes[] = {64,      64,      64,      64, 11,      10,      7,       5,       3,       0,       0,  0,     0};
 	char dest1[64];
 	char dest2[64];
 
