@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:14:00 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/18 09:07:43 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/18 09:49:38 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void test_ft_bzero(void)
 	memcpy(mem, "hello", 6);
 	memcpy(target, "hello", 6);
 	ft_bzero(mem, 0);
-	bzero(target, 0);
+	bzero(target, (0));
 	ASSERT_ARR_EQ(mem, target, 6);
 }
 
@@ -307,9 +307,43 @@ void test_ft_lstdelone(void)
 	ft_lstdelone(NULL, _del_node);
 }
 
+void _iter_node(void *content) {
+	((char *)content)[0]++;
+}
+
 void test_ft_lstiter(void)
 {
+	char content1[] = "a", content2[] = "b", content3[] = "c";
+	t_list *lst = NULL;
 
+	// test normal 3 node list with content
+	ft_lstadd_front(&lst, ft_lstnew(content1));
+	ft_lstadd_front(&lst, ft_lstnew(content2));
+	ft_lstadd_front(&lst, ft_lstnew(content3));
+
+	ft_lstiter(lst, _iter_node);
+
+	ASSERT_STR_EQ(content1, "b");
+	ASSERT_STR_EQ(content2, "c");
+	ASSERT_STR_EQ(content3, "d");
+	ft_lstclear(&lst, NULL);
+
+	// test null first args
+	ft_lstiter(NULL, _iter_node);
+
+	lst = ft_lstnew(NULL);
+
+	// test null content
+	ft_lstiter(lst, _iter_node);
+
+	// test null second args and null content
+	ft_lstiter(lst, NULL);
+
+	// test null second args with content
+	lst->content = content1;
+	ft_lstiter(lst, NULL);
+
+	ft_lstdelone(lst, NULL);
 }
 
 void test_ft_lstlast(void)
