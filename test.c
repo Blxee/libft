@@ -236,7 +236,16 @@ void test_ft_lstclear(void)
 
 void test_ft_lstdelone(void)
 {
+	char content[] = "A";
+	t_list *lst = ft_lstnew(content);
 
+	ft_lstdelone(lst, _del_node);
+	ASSERT_STR_EQ(content, "B");
+
+	lst = ft_lstnew(content);
+	ft_lstdelone(lst, NULL);
+
+	ft_lstdelone(NULL, _del_node);
 }
 
 void test_ft_lstiter(void)
