@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:14:00 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/18 13:11:15 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/18 16:27:27 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -757,15 +757,15 @@ void test_ft_putstr_fd(void)
 void test_ft_split(void)
 {
 	char *phrase = "   hello   world from     1337   ";
-	char *target[4] = {"hello", "world", "from" "1337"};
+	char *target[4] = {"hello", "world", "from", "1337"};
 	char **splt;
 	int i;
 
-	return; // TODO: debug this!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	splt = ft_split(phrase, ' ');
 	for (i = 0; i < 4; i++)
 		ASSERT_STR_EQ(splt[i], target[i]);
 	ASSERT_NULL((void *)splt[i]);
+	ft_split(NULL, 0);
 }
 
 void test_ft_strchr(void)

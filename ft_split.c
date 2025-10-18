@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 20:48:35 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/14 21:35:13 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/18 16:02:54 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static size_t	ft_count_strings(char const *s, char c)
 			count++;
 			i += len;
 		}
-		else
+		else if (s[i] != '\0')
 			i++;
 	}
 	return (count);
@@ -45,6 +45,8 @@ char	**ft_split(char const *s, char c)
 	size_t	i;
 	size_t	len;
 
+	if (s == NULL)
+		return (NULL);
 	arr = malloc((ft_count_strings(s, c) + 1) * sizeof(char *));
 	if (arr == NULL)
 		return (NULL);
@@ -69,7 +71,7 @@ char	**ft_split(char const *s, char c)
 			arr_idx++;
 			i += len;
 		}
-		else
+		else if (s[i] != '\0')
 			i++;
 	}
 	arr[arr_idx] = NULL;
