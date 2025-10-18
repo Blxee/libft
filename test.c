@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:14:00 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/18 09:49:38 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/18 10:33:12 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -348,7 +348,24 @@ void test_ft_lstiter(void)
 
 void test_ft_lstlast(void)
 {
+	t_list *lst = NULL;
 
+	ASSERT_EQ(ft_lstlast(lst), NULL);
+
+	ft_lstadd_back(&lst, ft_lstnew(NULL));
+	ASSERT_EQ(ft_lstlast(lst), lst);
+
+	ft_lstadd_back(&lst, ft_lstnew(NULL));
+	ASSERT_EQ(ft_lstlast(lst), lst->next);
+
+	ft_lstadd_back(&lst, ft_lstnew(NULL));
+	ASSERT_EQ(ft_lstlast(lst), lst->next->next);
+
+	ft_lstdelone(lst->next->next, NULL);
+	lst->next->next = NULL;
+	ASSERT_EQ(ft_lstlast(lst), lst->next);
+
+	ft_lstclear(&lst, NULL);
 }
 
 void test_ft_lstmap(void)
