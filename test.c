@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:14:00 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/17 20:59:45 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/18 09:07:43 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,28 @@ void test_ft_itoa(void)
 
 void test_ft_lstadd_back(void)
 {
+	char *content1 = "one";
+	char *content2 = "two";
+	char *content3 = "three";
+	t_list *lst = NULL;
+	t_list *next = ft_lstnew(content2);
+	t_list *nextnext = ft_lstnew(content3);
+	t_list target;
 
+	ft_lstadd_back(&lst, ft_lstnew(content1));
+	ft_lstadd_back(&lst, next);
+	ft_lstadd_back(&lst, nextnext);
+
+	target = (t_list){.content=content1, .next=next};
+	ASSERT_MEM_EQ(lst, &target, sizeof(t_list));
+
+	target = (t_list){.content=content2, .next=nextnext};
+	ASSERT_MEM_EQ(lst->next, &target, sizeof(t_list));
+
+	target = (t_list){.content=content3, .next=NULL};
+	ASSERT_MEM_EQ(lst->next->next, &target, sizeof(t_list));
+
+	ft_lstclear(&lst, NULL);
 }
 
 void test_ft_lstadd_front(void)
