@@ -49,19 +49,46 @@ void test_ft_isdigit()
 
 void test_ft_atoi(void)
 {
-	ASSERT_EQ(ft_atoi("12"), atoi("12"));
-	ASSERT_EQ(ft_atoi("0"), atoi("0"));
-	ASSERT_EQ(ft_atoi("-123"), atoi("-123"));
-	ASSERT_EQ(ft_atoi("-0"), atoi("-0"));
-	ASSERT_EQ(ft_atoi("abc"), atoi("abc"));
-	ASSERT_EQ(ft_atoi("\t\t   123abc"), atoi("\t\n   123abc"));
-	ASSERT_EQ(ft_atoi(""), atoi(""));
-	ASSERT_EQ(ft_atoi("-+123"), atoi("-+123"));
-	ASSERT_EQ(ft_atoi("+123"), atoi("+123"));
-	ASSERT_EQ(ft_atoi("2147483647"), atoi("2147483647"));
-	ASSERT_EQ(ft_atoi("-2147483648"), atoi("-2147483648"));
-	ASSERT_EQ(ft_atoi("-2147483649"), atoi("-2147483649"));
-	ASSERT_EQ(ft_atoi("2147483648"), atoi("2147483648"));
+	char *str;
+
+	str = "12";
+	ASSERT_EQ(ft_atoi(str), atoi(str));
+
+	str = "0";
+	ASSERT_EQ(ft_atoi(str), atoi(str));
+
+	str = "-123";
+	ASSERT_EQ(ft_atoi(str), atoi(str));
+
+	str = "-0";
+	ASSERT_EQ(ft_atoi(str), atoi(str));
+
+	str = "abc";
+	ASSERT_EQ(ft_atoi(str), atoi(str));
+
+	str = "\t\t   123abc";
+	ASSERT_EQ(ft_atoi(str), atoi(str));
+
+	str = "";
+	ASSERT_EQ(ft_atoi(str), atoi(str));
+
+	str = "-+123";
+	ASSERT_EQ(ft_atoi(str), atoi(str));
+
+	str = "+123";
+	ASSERT_EQ(ft_atoi(str), atoi(str));
+
+	str = "2147483647";
+	ASSERT_EQ(ft_atoi(str), atoi(str));
+
+	str = "-2147483648";
+	ASSERT_EQ(ft_atoi(str), atoi(str));
+
+	str = "-2147483649";
+	ASSERT_EQ(ft_atoi(str), atoi(str));
+
+	str = "2147483648";
+	ASSERT_EQ(ft_atoi(str), atoi(str));
 }
 
 void test_ft_bzero(void)
