@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:14:00 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/18 11:17:53 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/18 11:36:31 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -387,7 +387,6 @@ void _del_mapped_content(void *content)
 
 void test_ft_lstmap(void)
 {
-	return;
 	char content1[] = "a", content2[] = "b", content3[] = "c";
 	t_list *lst = NULL, *result;
 
@@ -410,20 +409,21 @@ void test_ft_lstmap(void)
 	lst = ft_lstnew(NULL);
 
 	// test null content
-	result =  ft_lstmap(lst, _map_node, _del_mapped_content);
+	result = ft_lstmap(lst, _map_node, _del_mapped_content);
+	ASSERT_NON_NULL(result);
+	ASSERT_NULL(result->content);
 	ft_lstdelone(result, _del_mapped_content);
 
 	// test null second arg and null content
 	result = ft_lstmap(lst, NULL, _del_mapped_content);
-	ft_lstdelone(result, _del_mapped_content);
+	ASSERT_NULL(result);
 
 	// test null second arg with content
 	lst->content = content1;
 	result = ft_lstmap(lst, NULL, _del_mapped_content);
 	ASSERT_NULL(result);
-	ft_lstdelone(result, _del_mapped_content);
 
-	ft_lstdelone(lst, _del_mapped_content);
+	ft_lstdelone(lst, NULL);
 }
 
 void test_ft_lstnew(void)
