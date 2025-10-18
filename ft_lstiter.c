@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 09:42:08 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/18 09:50:13 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/18 11:15:43 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ void	ft_lstiter(t_list *lst, void (*f)(void *))
 		return ;
 	while (lst)
 	{
-		if (lst->content)
-			f(lst->content);
+		f(lst->content);
 		lst = lst->next;
 	}
 }

@@ -6,9 +6,11 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:14:00 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/18 10:33:12 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/18 11:17:53 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+// TODO: determine whether to apply iter or map on list if the content is NULL!!!!!!!!!!!
 
 #include "castrum.h"
 #include "libft.h"
@@ -266,7 +268,7 @@ void test_ft_lstclear(void)
 
 	ft_lstclear(&lst, NULL);
 
-	ASSERT_EQ(lst, NULL);
+	ASSERT_NULL(lst);
 	ASSERT_STR_EQ(content1, "a");
 	ASSERT_STR_EQ(content2, "b");
 	ASSERT_STR_EQ(content3, "c");
@@ -282,7 +284,7 @@ void test_ft_lstclear(void)
 
 	ft_lstclear(&lst, _del_node);
 
-	ASSERT_EQ(lst, NULL);
+	ASSERT_NULL(lst);
 	ASSERT_STR_EQ(content1, "b");
 	ASSERT_STR_EQ(content2, "c");
 	ASSERT_STR_EQ(content3, "d");
@@ -308,7 +310,8 @@ void test_ft_lstdelone(void)
 }
 
 void _iter_node(void *content) {
-	((char *)content)[0]++;
+	if (content)
+		((char *)content)[0]++;
 }
 
 void test_ft_lstiter(void)
@@ -328,7 +331,7 @@ void test_ft_lstiter(void)
 	ASSERT_STR_EQ(content3, "d");
 	ft_lstclear(&lst, NULL);
 
-	// test null first args
+	// test null first arg
 	ft_lstiter(NULL, _iter_node);
 
 	lst = ft_lstnew(NULL);
@@ -336,10 +339,10 @@ void test_ft_lstiter(void)
 	// test null content
 	ft_lstiter(lst, _iter_node);
 
-	// test null second args and null content
+	// test null second arg and null content
 	ft_lstiter(lst, NULL);
 
-	// test null second args with content
+	// test null second arg with content
 	lst->content = content1;
 	ft_lstiter(lst, NULL);
 
@@ -350,7 +353,7 @@ void test_ft_lstlast(void)
 {
 	t_list *lst = NULL;
 
-	ASSERT_EQ(ft_lstlast(lst), NULL);
+	ASSERT_NULL(ft_lstlast(lst));
 
 	ft_lstadd_back(&lst, ft_lstnew(NULL));
 	ASSERT_EQ(ft_lstlast(lst), lst);
@@ -368,9 +371,59 @@ void test_ft_lstlast(void)
 	ft_lstclear(&lst, NULL);
 }
 
+void *_map_node(void *content)
+{
+	if (content == NULL)
+		return (NULL);
+	char *copy = strdup(content);
+	copy[0]++;
+	return (copy);
+}
+
+void _del_mapped_content(void *content)
+{
+	free(content);
+}
+
 void test_ft_lstmap(void)
 {
+	return;
+	char content1[] = "a", content2[] = "b", content3[] = "c";
+	t_list *lst = NULL, *result;
 
+	// test normal 3 node list with content
+	ft_lstadd_back(&lst, ft_lstnew(content1));
+	ft_lstadd_back(&lst, ft_lstnew(content2));
+	ft_lstadd_back(&lst, ft_lstnew(content3));
+
+	result = ft_lstmap(lst, _map_node, _del_mapped_content);
+	ft_lstclear(&lst, NULL);
+
+	ASSERT_STR_EQ((char *)result->content, "b");
+	ASSERT_STR_EQ((char *)result->next->content, "c");
+	ASSERT_STR_EQ((char *)result->next->next->content, "d");
+	ft_lstclear(&result, _del_mapped_content);
+
+	// test null first arg
+	ft_lstmap(NULL, _map_node, _del_mapped_content);
+
+	lst = ft_lstnew(NULL);
+
+	// test null content
+	result =  ft_lstmap(lst, _map_node, _del_mapped_content);
+	ft_lstdelone(result, _del_mapped_content);
+
+	// test null second arg and null content
+	result = ft_lstmap(lst, NULL, _del_mapped_content);
+	ft_lstdelone(result, _del_mapped_content);
+
+	// test null second arg with content
+	lst->content = content1;
+	result = ft_lstmap(lst, NULL, _del_mapped_content);
+	ASSERT_NULL(result);
+	ft_lstdelone(result, _del_mapped_content);
+
+	ft_lstdelone(lst, _del_mapped_content);
 }
 
 void test_ft_lstnew(void)
@@ -675,7 +728,7 @@ void test_ft_split(void)
 	splt = ft_split(phrase, ' ');
 	for (i = 0; i < 4; i++)
 		ASSERT_STR_EQ(splt[i], target[i]);
-	ASSERT_EQ((void *)splt[i], NULL);
+	ASSERT_NULL((void *)splt[i]);
 }
 
 void test_ft_strchr(void)
