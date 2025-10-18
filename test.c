@@ -195,6 +195,42 @@ void test_ft_lstadd_front(void)
 
 void test_ft_lstclear(void)
 {
+	char content1[] = "a";
+	char content2[] = "b";
+	char content3[] = "c";
+	t_list *lst;
+	
+	// del is NULL
+	lst = ft_lstnew(content1);
+	ft_lstadd_front(&lst, ft_lstnew(content2));
+	ft_lstadd_front(&lst, ft_lstnew(content3));
+
+	ft_lstclear(&lst, NULL);
+
+	ASSERT_EQ(lst, NULL);
+	ASSERT_STR_EQ(content1, "a");
+	ASSERT_STR_EQ(content2, "b");
+	ASSERT_STR_EQ(content3, "c");
+
+	// only list is null
+	lst = NULL;
+	ft_lstclear(&lst, _del_node);
+
+	// both args are present
+	lst = ft_lstnew(content1);
+	ft_lstadd_front(&lst, ft_lstnew(content2));
+	ft_lstadd_front(&lst, ft_lstnew(content3));
+
+	ft_lstclear(&lst, _del_node);
+
+	ASSERT_EQ(lst, NULL);
+	ASSERT_STR_EQ(content1, "b");
+	ASSERT_STR_EQ(content2, "c");
+	ASSERT_STR_EQ(content3, "d");
+
+	// both args are NULL
+	lst = NULL;
+	ft_lstclear(&lst, NULL);
 
 }
 
