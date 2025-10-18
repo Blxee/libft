@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:14:00 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/18 16:27:27 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/18 21:20:09 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -756,15 +756,77 @@ void test_ft_putstr_fd(void)
 
 void test_ft_split(void)
 {
-	char *phrase = "   hello   world from     1337   ";
-	char *target[4] = {"hello", "world", "from", "1337"};
+	char *phrase;
 	char **splt;
 	int i;
 
+
+	phrase = "   hello   w from     1337   ";
+	char *target1[] = {"hello", "w", "from", "1337"};
 	splt = ft_split(phrase, ' ');
-	for (i = 0; i < 4; i++)
-		ASSERT_STR_EQ(splt[i], target[i]);
+	for (i = 0; i < sizeof(target1) / sizeof(*target1); i++)
+		ASSERT_STR_EQ(splt[i], target1[i]);
 	ASSERT_NULL((void *)splt[i]);
+	for (i = 0; splt[i]; i++)
+		free(splt[i]);
+	free(splt);
+
+	phrase = "   hello   ";
+	char *target2[] = {"hello"};
+	splt = ft_split(phrase, ' ');
+	for (i = 0; i < sizeof(target2) / sizeof(*target2); i++)
+		ASSERT_STR_EQ(splt[i], target2[i]);
+	ASSERT_NULL((void *)splt[i]);
+	for (i = 0; splt[i]; i++)
+		free(splt[i]);
+	free(splt);
+
+	phrase = "";
+	char *target3[] = {};
+	splt = ft_split(phrase, ' ');
+	ASSERT_NULL((void *)splt[i]);
+	free(splt);
+
+	phrase = "   hello";
+	char *target4[] = {"hello"};
+	splt = ft_split(phrase, ' ');
+	for (i = 0; i < sizeof(target4) / sizeof(*target4); i++)
+		ASSERT_STR_EQ(splt[i], target4[i]);
+	ASSERT_NULL((void *)splt[i]);
+	for (i = 0; splt[i]; i++)
+		free(splt[i]);
+	free(splt);
+
+	phrase = "hello   ";
+	char *target5[] = {"hello"};
+	splt = ft_split(phrase, ' ');
+	for (i = 0; i < sizeof(target5) / sizeof(*target5); i++)
+		ASSERT_STR_EQ(splt[i], target5[i]);
+	ASSERT_NULL((void *)splt[i]);
+	for (i = 0; splt[i]; i++)
+		free(splt[i]);
+	free(splt);
+
+	phrase = "    A   ";
+	char *target6[] = {"A"};
+	splt = ft_split(phrase, ' ');
+	for (i = 0; i < sizeof(target6) / sizeof(*target6); i++)
+		ASSERT_STR_EQ(splt[i], target6[i]);
+	ASSERT_NULL((void *)splt[i]);
+	for (i = 0; splt[i]; i++)
+		free(splt[i]);
+	free(splt);
+
+	phrase = "A  B        C";
+	char *target7[] = {"A", "B", "C"};
+	splt = ft_split(phrase, ' ');
+	for (i = 0; i < sizeof(target7) / sizeof(*target7); i++)
+		ASSERT_STR_EQ(splt[i], target7[i]);
+	ASSERT_NULL((void *)splt[i]);
+	for (i = 0; splt[i]; i++)
+		free(splt[i]);
+	free(splt);
+
 	ft_split(NULL, 0);
 }
 
