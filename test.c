@@ -281,7 +281,16 @@ void test_ft_lstnew(void)
 
 void test_ft_lstsize(void)
 {
+	t_list *lst = ft_lstnew(NULL);
+	ASSERT_EQ(ft_lstsize(lst), 1);
 
+	ft_lstadd_front(&lst, ft_lstnew(NULL));
+	ASSERT_EQ(ft_lstsize(lst), 2);
+
+	ft_lstadd_front(&lst, ft_lstnew(NULL));
+	ASSERT_EQ(ft_lstsize(lst), 3);
+
+	ft_lstclear(&lst, NULL);
 }
 
 void test_ft_memchr(void)
