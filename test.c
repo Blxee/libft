@@ -190,7 +190,39 @@ void test_ft_lstadd_back(void)
 
 void test_ft_lstadd_front(void)
 {
+	char *content1 = "one";
+	char *content2 = "two";
+	char *content3 = "three";
+	t_list *lst = NULL, *node1, *node2, *node3;
+	t_list target;
 
+	node1 = ft_lstnew(content1);
+	ft_lstadd_front(&lst, node1);
+	target = (t_list){.content=content1, .next=NULL};
+	ASSERT_MEM_EQ(lst, &target, sizeof(t_list));
+
+	node2 = ft_lstnew(content2);
+	ft_lstadd_front(&lst, node2);
+	target = (t_list){.content=content2, .next=node1};
+	ASSERT_MEM_EQ(lst, &target, sizeof(t_list));
+	target = (t_list){.content=content1, .next=NULL};
+	ASSERT_MEM_EQ(lst->next, &target, sizeof(t_list));
+
+	node3 = ft_lstnew(content3);
+	ft_lstadd_front(&lst, node3);
+	target = (t_list){.content=content3, .next=node2};
+	ASSERT_MEM_EQ(lst, &target, sizeof(t_list));
+	target = (t_list){.content=content2, .next=node1};
+	ASSERT_MEM_EQ(lst->next, &target, sizeof(t_list));
+	target = (t_list){.content=content1, .next=NULL};
+	ASSERT_MEM_EQ(lst->next->next, &target, sizeof(t_list));
+
+	ft_lstclear(&lst, NULL);
+}
+
+void _del_node(void *content)
+{
+	((char *)content)[0]++;
 }
 
 void test_ft_lstclear(void)
