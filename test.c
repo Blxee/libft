@@ -265,8 +265,18 @@ void test_ft_lstmap(void)
 
 void test_ft_lstnew(void)
 {
-	t_list *lst = ft_lstnew("hello");
+	char *content = "hello";
+	t_list *lst, target;
 
+	lst = ft_lstnew(content);
+	target = (t_list){.content=content, .next=NULL};
+	ASSERT_MEM_EQ(lst, &target, sizeof(t_list));
+	ft_lstdelone(lst, NULL);
+
+	lst = ft_lstnew(NULL);
+	target = (t_list){.content=NULL, .next=NULL};
+	ASSERT_MEM_EQ(lst, &target, sizeof(t_list));
+	ft_lstdelone(lst, NULL);
 }
 
 void test_ft_lstsize(void)
