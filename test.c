@@ -6,11 +6,9 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:14:00 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/18 11:36:31 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/18 13:11:15 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// TODO: determine whether to apply iter or map on list if the content is NULL!!!!!!!!!!!
 
 #include "castrum.h"
 #include "libft.h"
@@ -155,7 +153,46 @@ void test_ft_isascii(void)
 
 void test_ft_isprint(void)
 {
-	ASSERT_EQ(ft_isprint('a'), isprint('a'));
+	char c;
+
+	c = 'a';
+	ASSERT_EQ(ft_isprint(c), isprint(c));
+
+	c = 'z';
+	ASSERT_EQ(ft_isprint(c), isprint(c));
+
+	c = 'A';
+	ASSERT_EQ(ft_isprint(c), isprint(c));
+
+	c = 'Z';
+	ASSERT_EQ(ft_isprint(c), isprint(c));
+
+	c = '0';
+	ASSERT_EQ(ft_isprint(c), isprint(c));
+
+	c = '9';
+	ASSERT_EQ(ft_isprint(c), isprint(c));
+
+	c = '$';
+	ASSERT_EQ(ft_isprint(c), isprint(c));
+
+	c = '!';
+	ASSERT_EQ(ft_isprint(c), isprint(c));
+
+	c = 32;
+	ASSERT_EQ(ft_isprint(c), isprint(c));
+
+	c = 126;
+	ASSERT_EQ(ft_isprint(c), isprint(c));
+
+	c = 127;
+	ASSERT_EQ(ft_isprint(c), isprint(c));
+
+	c = 31;
+	ASSERT_EQ(ft_isprint(c), isprint(c));
+
+	c = 0;
+	ASSERT_EQ(ft_isprint(c), isprint(c));
 }
 
 void test_ft_itoa(void)
@@ -951,7 +988,20 @@ void test_ft_strtrim(void)
 
 void test_ft_substr(void)
 {
+	char *strs[] = {         "hello", "hello", "hello", "hello", "hello", "hello", "hello", "hello", "", "", ""};
+	unsigned int starts[] = {0,       0,       0,       0,       2,       0,       4,       4,       0,  3,  3};
+	size_t lengths[] = {     4,       5,       6,       10,      3,       0,       0,       10,      10, 2,  10};
+	char *expected[] = {     "hell",  "hello", "hello", "hello", "llo",   "",      "",      "o",     "", "", ""};
+	char *result;
 
+	for (int i = 0; i < sizeof(strs) / sizeof(*strs); i++)
+	{
+		result = ft_substr(strs[i], starts[i], lengths[i]);
+		ASSERT_STR_EQ(result, expected[i]);
+		free(result);
+	}
+	result = ft_substr(NULL, 0, 5);
+	ASSERT_NULL(result);
 }
 
 void test_ft_tolower(void)
