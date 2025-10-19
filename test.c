@@ -1059,16 +1059,26 @@ void test_ft_strtrim(void)
 
 void test_ft_substr(void)
 {
-	char *strs[] = {         "hello", "hello", "hello", "hello", "hello", "hello", "hello", "hello", "", "", ""};
-	unsigned int starts[] = {0,       0,       0,       0,       2,       0,       4,       4,       0,  3,  3};
-	size_t lengths[] = {     4,       5,       6,       10,      3,       0,       0,       10,      10, 2,  10};
-	char *expected[] = {     "hell",  "hello", "hello", "hello", "llo",   "",      "",      "o",     "", "", ""};
+	char *strs[] = {         "hello", "hello", "hello", "hello", "hello", "hello", "hello", "hello", "", "", "", NULL, NULL, NULL, NULL};
+	unsigned int starts[] = {0,       0,       0,       0,       2,       0,       4,       4,       0,  3,  3,  0,    0,    5,    10};
+	size_t lengths[] = {     4,       5,       6,       10,      3,       0,       0,       10,      10, 2,  10, 5,    0,    0,    5};
+	char *expected[] = {     "hell",  "hello", "hello", "hello", "llo",   "",      "",      "o",     "", "", "", NULL, NULL, NULL, NULL};
 	char *result;
 
 	for (int i = 0; i < sizeof(strs) / sizeof(*strs); i++)
 	{
+		TEST_INFO(strs[i]);
+		TEST_INFO(starts[i]);
+		TEST_INFO(lengths[i]);
 		result = ft_substr(strs[i], starts[i], lengths[i]);
-		ASSERT_STR_EQ(result, expected[i]);
+		if (expected[i])
+		{
+			ASSERT_STR_EQ(result, expected[i]);
+		}
+		else
+		{
+			ASSERT_NULL(result);
+		}
 		free(result);
 	}
 	result = ft_substr(NULL, 0, 5);
