@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:14:00 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/18 21:20:09 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/19 12:13:01 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -885,9 +885,9 @@ void test_ft_striteri(void)
 
 void test_ft_strjoin(void)
 {
-	char *strs1[] =  {"he",    "hey", "",   "hello", NULL,    NULL};
-	char *strs2[] =  {"llo",   "",    "hi", NULL,    "hello", NULL};
-	char *target[] = {"hello", "hey", "hi", NULL,    NULL,    NULL};
+	char *strs1[] =  {"he",    "hey", "",   "", "hello", NULL,    NULL};
+	char *strs2[] =  {"llo",   "",    "hi", "", NULL,    "hello", NULL};
+	char *target[] = {"hello", "hey", "hi", "", NULL,    NULL,    NULL};
 	char *out;
 
 	for (int i = 0; i < sizeof(strs1) / sizeof(*strs1); i++)
@@ -1011,13 +1011,20 @@ void test_ft_strncmp(void)
 
 void test_ft_strnstr(void)
 {
-	char *haystacks[] = {"hello", "hello", "hello", "hello", "hello", "hello",    "hello",  "hello", "hello",  "hello", "hello", "hello", "hello", "hello", "hello", "hello",  "hello", "hello",  "hello", "hello", "hello", "hello", "hello", "hello",    "hello",  "hello", "hello",  "", "", "",    "",    ""};
-	char *needles[] =   {"he",    "hello", "llo",   "",      "zzz",   "zhel",     "helloz", "helz",  "zhello", "he",    "hello", "llo",   "",      "zzz",   "zhel",  "helloz", "helz",  "zhello", "he",    "hello", "llo",   "",      "zzz",   "zhel",     "helloz", "helz",  "zhello", "", "", "hey", "hey", "hey"};
-	size_t sizes[] =    {5,       5,       5,       5,       5,       5,          5,        5,       5,        3,       3,       3,       3,       3,       3,       3,        3,       3,        10,      10,      10,      10,      10,      10,         10,       10,      10,       0,  5,  0,     3,     5};
+	char *haystacks[] = {"hello", "hello", "hello", "hello", "hello", "hello",    "hello",  "hello", "hello",  "hello", "hello", "hello", "hello", "hello", "hello", "hello",  "hello", "hello",  "hello", "hello", "hello", "hello", "hello", "hello",    "hello",  "hello", "hello",  "", "", "",    "",    "",    NULL,  NULL, NULL};
+	char *needles[] =   {"he",    "hello", "llo",   "",      "zzz",   "zhel",     "helloz", "helz",  "zhello", "he",    "hello", "llo",   "",      "zzz",   "zhel",  "helloz", "helz",  "zhello", "he",    "hello", "llo",   "",      "zzz",   "zhel",     "helloz", "helz",  "zhello", "", "", "hey", "hey", "hey", "hey", "",   ""};
+	size_t sizes[] =    {5,       5,       5,       5,       5,       5,          5,        5,       5,        3,       3,       3,       3,       3,       3,       3,        3,       3,        10,      10,      10,      10,      10,      10,         10,       10,      10,       0,  5,  0,     3,     5,     0,     5,    0};
 
-	// strnstr(NULL, "", 1);
+	// strnstr("", NULL, 1); // seg
+	// strnstr("", NULL, 0); // seg
+	// strnstr(NULL, "", 1); // good
+	// strnstr(NULL, "", 0); // good
+	// strnstr(NULL, NULL, 1); // seg
+	// strnstr(NULL, NULL, 0); // seg
+	// ft_strnstr(NULL, "hey", 5); // seg
 	for (int i = 0; i < sizeof(haystacks) / sizeof(*haystacks); i++)
 	{
+		TEST_INFO(i);
 		ASSERT_EQ(ft_strnstr(haystacks[i], needles[i], sizes[i]), strnstr(haystacks[i], needles[i], sizes[i]));
 	}	
 }
