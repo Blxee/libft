@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:14:00 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/19 12:13:01 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/19 14:59:27 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,18 @@ void test_ft_atoi(void)
 	ASSERT_EQ(ft_atoi(str), atoi(str));
 
 	str = "2147483648";
+	ASSERT_EQ(ft_atoi(str), atoi(str));
+
+	str = "18434444444444444444444444444444444444444444444446744073709551616";
+	ASSERT_EQ(ft_atoi(str), atoi(str));
+
+	str = "-18434444444444444444444444444444444444444444444446744073709551616";
+	ASSERT_EQ(ft_atoi(str), atoi(str));
+
+	str =	"9223372036854775807";
+	ASSERT_EQ(ft_atoi(str), atoi(str));
+
+	str =	"-9223372036854775808";
 	ASSERT_EQ(ft_atoi(str), atoi(str));
 }
 
@@ -1017,9 +1029,9 @@ void test_ft_strncmp(void)
 
 void test_ft_strnstr(void)
 {
-	char *haystacks[] = {"hello", "hello", "hello", "hello", "hello", "hello",    "hello",  "hello", "hello",  "hello", "hello", "hello", "hello", "hello", "hello", "hello",  "hello", "hello",  "hello", "hello", "hello", "hello", "hello", "hello",    "hello",  "hello", "hello",  "", "", "",    "",    "",    NULL,  NULL, NULL};
-	char *needles[] =   {"he",    "hello", "llo",   "",      "zzz",   "zhel",     "helloz", "helz",  "zhello", "he",    "hello", "llo",   "",      "zzz",   "zhel",  "helloz", "helz",  "zhello", "he",    "hello", "llo",   "",      "zzz",   "zhel",     "helloz", "helz",  "zhello", "", "", "hey", "hey", "hey", "hey", "",   ""};
-	size_t sizes[] =    {5,       5,       5,       5,       5,       5,          5,        5,       5,        3,       3,       3,       3,       3,       3,       3,        3,       3,        10,      10,      10,      10,      10,      10,         10,       10,      10,       0,  5,  0,     3,     5,     0,     5,    0};
+	char *haystacks[] = {"hello", "hello", "hello", "hello", "hello", "hello", "hello",  "hello", "hello",  "hello", "hello", "hello", "hello", "hello", "hello", "hello",  "hello", "hello",  "hello", "hello", "hello", "hello", "hello", "hello",    "hello",  "hello", "hello",  "", "", "",    "",    "",    NULL,  NULL, NULL};
+	char *needles[] =   {"he",    "hello", "llo",   "",      "zzz",   "zhel",  "helloz", "helz",  "zhello", "he",    "hello", "llo",   "",      "zzz",   "zhel",  "helloz", "helz",  "zhello", "he",    "hello", "llo",   "",      "zzz",   "zhel",     "helloz", "helz",  "zhello", "", "", "hey", "hey", "hey", "hey", "",   ""};
+	size_t sizes[] =    {5,       5,       5,       5,       5,       5,       5,        5,       5,        3,       3,       3,       3,       3,       3,       3,        3,       3,        10,      10,      10,      10,      10,      10,         10,       10,      10,       0,  5,  0,     3,     5,     0,     5,    0};
 
 	// strnstr("", NULL, 1); // seg
 	// strnstr("", NULL, 0); // seg
@@ -1050,6 +1062,12 @@ void test_ft_strrchr(void)
 
 	str = "hello";
 	ASSERT_EQ(ft_strrchr(str, '\0'), strrchr(str, '\0'));
+
+	str = "";
+	ASSERT_EQ(ft_strrchr(str, '\0'), strrchr(str, '\0'));
+
+	str = "";
+	ASSERT_EQ(ft_strrchr(str, 'a'), strrchr(str, 'a'));
 }
 
 void test_ft_strtrim(void)
