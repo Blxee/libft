@@ -845,6 +845,12 @@ void test_ft_strchr(void)
 
 	str = "hello";
 	ASSERT_EQ(ft_strchr(str, '\0'), strchr(str, '\0'));
+
+	str = "";
+	ASSERT_EQ(ft_strchr(str, '\0'), strchr(str, '\0'));
+
+	str = "";
+	ASSERT_EQ(ft_strchr(str, 'a'), strchr(str, 'a'));
 }
 
 void test_ft_strdup(void)
