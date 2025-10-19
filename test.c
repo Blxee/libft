@@ -887,13 +887,22 @@ void test_ft_strjoin(void)
 {
 	char *strs1[] =  {"he",    "hey", "",   "hello", NULL,    NULL};
 	char *strs2[] =  {"llo",   "",    "hi", NULL,    "hello", NULL};
-	char *target[] = {"hello", "hey", "hi", "hello", "hello", ""};
+	char *target[] = {"hello", "hey", "hi", NULL,    NULL,    NULL};
 	char *out;
 
 	for (int i = 0; i < sizeof(strs1) / sizeof(*strs1); i++)
 	{
+		TEST_INFO(strs1[i]);
+		TEST_INFO(strs2[i]);
 		out = ft_strjoin(strs1[i], strs2[i]);
-		ASSERT_STR_EQ(out, target[i]);
+		if (target[i])
+		{
+			ASSERT_STR_EQ(out, target[i]);
+		}
+		else
+		{
+			ASSERT_NULL(out);
+		}
 		free(out);
 	}
 }
