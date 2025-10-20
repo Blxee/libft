@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 13:50:01 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/19 14:05:33 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/20 09:30:23 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_strchr(const char *s, int c)
 		if (s[i] == c)
 			return ((char *)(s + i));
 		if (s[i] == '\0')
-			break;
+			break ;
 		i++;
 	}
 	return (NULL);

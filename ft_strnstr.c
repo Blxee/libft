@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 14:23:16 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/19 13:28:38 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/20 09:30:02 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	int max_len;
-	int little_len;
+	int	max_len;
+	int	little_len;
 	int	i;
-
 
 	max_len = (int)len;
 	little_len = (int)ft_strlen(little);
