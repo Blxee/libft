@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 08:27:49 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/20 10:53:18 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/20 11:56:31 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,25 @@
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	char *nbr;
-	
-	nbr = ft_itoa(n);
-	ft_putstr_fd(nbr, fd);
-	free(nbr);
+	int		i;
+	char	nbr[12];
+	long	num;
+	int		is_first_digit;
+
+	num = (long)n;
+	i = 0;
+	if (num < 0)
+		num = -num;
+	is_first_digit = 1;
+	while (num > 0 || is_first_digit)
+	{
+		nbr[i++] = '0' + num % 10;
+		is_first_digit = 0;
+		num /= 10;
+	}
+	if (n < 0)
+		nbr[i++] = '-';
+	i--;
+	while (i >= 0)
+		write(fd, nbr + i--, 1);
 }
