@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 13:27:04 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/17 09:51:48 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/20 08:03:55 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	size_t	srclen;
 	size_t	i;
 
-	if (dst == NULL || src == NULL)
-		return (0);
-	dstlen = ft_strlen(dst);
 	srclen = ft_strlen(src);
+	if (size == 0)
+		return (srclen);
+	dstlen = ft_strlen(dst);
 	if (size <= dstlen)
 		return (size + srclen);
 	i = 0;
