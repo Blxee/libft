@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 14:14:26 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/16 17:24:30 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/20 08:16:23 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	unsigned char	*mem2;
 	size_t			i;
 
-	if (n == 0 || s1 == NULL || s2 == NULL)
-		return (0);
 	mem1 = (unsigned char *)s1;
 	mem2 = (unsigned char *)s2;
 	i = 0;
