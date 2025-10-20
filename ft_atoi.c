@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 14:52:36 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/19 14:58:28 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/20 09:04:16 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ int	ft_atoi(const char *nptr)
 	long	nbr;
 	int		sign;
 
-	if (nptr == NULL)
-		return (0);
 	nbr = 0;
 	i = 0;
 	while (ft_isspace(nptr[i]))
