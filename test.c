@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:14:00 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/20 09:19:51 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/20 12:10:23 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -872,16 +872,23 @@ void test_ft_strchr(void)
 
 void test_ft_strdup(void)
 {
-	char *target;
+	char *target[] = {
+		"hello",
+		"",
+		"hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello",
+	};
 	char *dup1;
 	char *dup2;
 
-	target = "hello";
-	dup1 = ft_strdup(target);
-	dup2 = strdup(target);
-	ASSERT_STR_EQ(dup1, dup2);
-	free(dup1);
-	free(dup2);
+	for (int i = 0; i < sizeof(target) / sizeof(*target); i++)
+	{
+		TEST_INFO(i);
+		dup1 = ft_strdup(target[i]);
+		dup2 = strdup(target[i]);
+		ASSERT_STR_EQ(dup1, dup2);
+		free(dup1);
+		free(dup2);
+	}
 }
 
 void _striteri_foo(unsigned int i, char *c)
