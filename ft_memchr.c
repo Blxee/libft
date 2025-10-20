@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 14:08:35 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/15 10:59:06 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/20 08:13:54 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	unsigned char	*mem;
 	size_t			i;
 
-	if (s == NULL)
-		return (NULL);
 	mem = (unsigned char *)s;
 	i = 0;
 	while (i < n)
