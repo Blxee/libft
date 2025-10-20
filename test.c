@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:14:00 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/20 08:04:40 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/20 09:19:51 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -439,6 +439,8 @@ void test_ft_lstmap(void)
 	char content1[] = "a", content2[] = "b", content3[] = "c";
 	t_list *lst = NULL, *result;
 
+	ft_lstmap(NULL, _map_node, _del_mapped_content);
+
 	// test normal 3 node list with content
 	ft_lstadd_back(&lst, ft_lstnew(content1));
 	ft_lstadd_back(&lst, ft_lstnew(content2));
@@ -494,6 +496,9 @@ void test_ft_lstnew(void)
 void test_ft_lstsize(void)
 {
 	t_list *lst = ft_lstnew(NULL);
+
+	ASSERT_EQ(ft_lstsize(NULL), 0);
+
 	ASSERT_EQ(ft_lstsize(lst), 1);
 
 	ft_lstadd_front(&lst, ft_lstnew(NULL));
@@ -1043,6 +1048,7 @@ void test_ft_strnstr(void)
 	// strnstr(NULL, NULL, 1); // seg
 	// strnstr(NULL, NULL, 0); // seg
 	// ft_strnstr(NULL, "hey", 5); // seg
+	// strnstr(NULL, "hey", 0); // good
 	for (int i = 0; i < sizeof(haystacks) / sizeof(*haystacks); i++)
 	{
 		TEST_INFO(i);
