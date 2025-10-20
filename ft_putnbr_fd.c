@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 08:27:49 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/15 08:28:31 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/20 10:53:18 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,9 @@
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	ft_putstr_fd(ft_itoa(n), fd);
+	char *nbr;
+	
+	nbr = ft_itoa(n);
+	ft_putstr_fd(nbr, fd);
+	free(nbr);
 }
