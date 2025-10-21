@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 15:13:21 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/15 10:42:27 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/21 10:20:54 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	if (memory == NULL)
 		return (NULL);
 	i = 0;
-	while (i < size)
+	while (i < nmemb * size)
 	{
 		memory[i] = 0;
 		i++;
