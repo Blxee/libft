@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 08:24:21 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/20 09:14:00 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/21 16:26:16 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_putendl_fd(char *s, int fd)
 {
-	if (s != NULL)
+	if (s != NULL && fd >= 0)
 	{
 		ft_putstr_fd(s, fd);
 		ft_putchar_fd('\n', fd);
