@@ -18,7 +18,7 @@ BONUS_OBJS = $(BONUS_SRCS:.c=.o)
 $(NAME): $(OBJS)
 	ar -rcs $@ $^
 
-%.o: %.c
+%.o: %.c libft.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 all: $(NAME)
