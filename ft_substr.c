@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 15:56:36 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/21 10:57:35 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/21 12:08:35 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	sub_len = ft_strlen(s);
 	if (len < sub_len)
 		sub_len = len;
-	sub = malloc(sub_len + 1);
+	sub = ft_calloc(sizeof(char), sub_len + 1);
+	if (start >= sub_len)
+		return (sub);
 	if (sub == NULL)
 		return (NULL);
 	i = 0;
