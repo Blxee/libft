@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 13:50:01 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/21 13:23:22 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/22 11:40:50 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ char	*ft_strchr(const char *s, int c)
 {
 	size_t	i;
 
+	if (s == NULL)
+		return (NULL);
 	i = 0;
 	while (1)
 	{

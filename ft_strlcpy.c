@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 09:54:17 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/17 19:40:36 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/22 11:39:39 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	size_t	i;
 	size_t	src_len;
 
+	if (dst == NULL || src == NULL)
+		return (0);
 	src_len = ft_strlen(src);
 	if (size > 0)
 	{
