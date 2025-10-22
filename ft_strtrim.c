@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 16:13:59 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/20 09:11:14 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/22 14:42:08 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ char	*ft_strtrim(char const *s1, char const *set)
 	new = malloc(len);
 	if (new == NULL)
 		return (NULL);
-	new[0] = '\0';
 	ft_strlcpy(new, s1 + start_idx, len);
 	return (new);
 }

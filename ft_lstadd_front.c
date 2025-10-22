@@ -6,16 +6,16 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 09:12:19 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/15 09:13:46 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/22 12:02:23 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_front(t_list **lst, t_list *node)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	if (lst == NULL || node == NULL)
+	if (lst == NULL || new == NULL)
 		return ;
-	node->next = *lst;
-	*lst = node;
+	new->next = *lst;
+	*lst = new;
 }
