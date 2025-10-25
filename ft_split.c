@@ -6,7 +6,7 @@
 /*   By: atahiri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 20:48:35 by atahiri-          #+#    #+#             */
-/*   Updated: 2025/10/23 12:29:16 by atahiri-         ###   ########.fr       */
+/*   Updated: 2025/10/25 08:07:40 by atahiri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ size_t	ft_make_str(char ***arr, size_t *arr_idx, size_t len, const char *s)
 		while (*arr_idx > 0)
 			free((*arr)[--*arr_idx]);
 		free(*arr);
+		*arr = NULL;
 		return (0);
 	}
 	ft_strlcpy((*arr)[*arr_idx], s, len + 1);
